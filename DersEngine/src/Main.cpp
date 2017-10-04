@@ -1,41 +1,14 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
+#include "graphics\Window.h"
 
 int main(void)
 {
-	GLFWwindow* window;
+	Window window = { 800, 600 };
 
-	if (!glfwInit())
+	while (!window.IsClosed())
 	{
-		return -1;
+		window.PollEvents();
+		window.SwapBuffers();
 	}
-		
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window);
-
-	if (glewInit() != GLEW_OK)
-	{
-		std::cout << "Failed to initialize glew!" << std::endl;
-	}
-
-	std::cout << glGetString(GL_VERSION) << std::endl;
-
-	while (!glfwWindowShouldClose(window))
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-
-	glfwTerminate();
 
 	return 0;
 }
