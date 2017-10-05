@@ -147,12 +147,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameApplication.cpp" />
+    <ClCompile Include="src\core\MessageBus.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\systems\System.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\GameApplication.h" />
+    <ClInclude Include="src\core\MessageBus.h" />
     <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\systems\System.h" />
     <ClInclude Include="src\utils\Debug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
