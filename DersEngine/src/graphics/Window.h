@@ -4,18 +4,27 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-class Window
+namespace engine 
 {
-private:
-	GLFWwindow* m_Window;
-public:
-	static size_t WIDTH;
-	static size_t HEIGHT;
+	namespace graphics 
+	{
+		class Window
+		{
+		private:
+			GLFWwindow* m_Window;
+		public:
+			static unsigned int WIDTH;
+			static unsigned int HEIGHT;
 
-	Window(size_t width, size_t height);
-	~Window();
+			Window(unsigned int width, unsigned int height,
+				const char* title, bool vsync, bool fullScreen);
+			~Window();
 
-	void PollEvents();
-	void SwapBuffers();
-	bool IsClosed();
-};
+			void PollEvents();
+			void SwapBuffers();
+			bool IsOpen();
+		};
+	}
+}
+
+

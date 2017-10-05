@@ -1,14 +1,11 @@
-#include "graphics\Window.h"
+#include "core\GameApplication.h"
 
-int main(void)
+int main(int c, char* args[])
 {
-	Window window = { 800, 600 };
+	using namespace engine;
 
-	while (!window.IsClosed())
-	{
-		window.PollEvents();
-		window.SwapBuffers();
-	}
+	core::GameApplication game = { 800, 600, "DersEngine v0.01", true, false };
+	game.Start();
 
 	return 0;
 }
