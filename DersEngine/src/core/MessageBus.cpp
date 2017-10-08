@@ -32,8 +32,8 @@ namespace engine
 				for (auto& system : m_Systems)
 				{
 					system->ProcessMessage(*m_MessageQueue[0]);
-					m_MessageQueue.pop_front();
 				}
+				m_MessageQueue.pop_front();
 			}
 		}
 	}
