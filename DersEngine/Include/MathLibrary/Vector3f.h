@@ -6,6 +6,8 @@ namespace DersEngine
 {
 	namespace Maths
 	{
+		class Quaternion;
+
 		class Vector3f
 		{
 		public:
@@ -60,6 +62,8 @@ namespace DersEngine
 			float Distance(const Vector3f& vector) const;
 			float Dot(const Vector3f& vector) const;
 			Vector3f Cross(const Vector3f& vector) const;
+			Vector3f Lerp(const Vector3f& target, float alpha);
+			Vector3f Rotate(const Quaternion& rotation);
 
 			std::string ToString() const;
 

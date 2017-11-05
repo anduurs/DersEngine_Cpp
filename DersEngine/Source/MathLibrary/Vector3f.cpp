@@ -1,4 +1,5 @@
 #include "MathLibrary\Vector3f.h"
+#include "MathLibrary\Quaternion.h"
 
 #include <sstream>
 
@@ -230,8 +231,20 @@ namespace DersEngine
 
 		Vector3f Vector3f::Cross(const Vector3f& vector) const
 		{
-			return Vector3f(y * vector.z - z * vector.y, 
-				z * vector.x - x * vector.z, x * vector.y - y * vector.x);
+			return { y * vector.z - z * vector.y,
+				z * vector.x - x * vector.z, x * vector.y - y * vector.x };
+		}
+
+		Vector3f Vector3f::Lerp(const Vector3f& target, float alpha)
+		{
+			return ((target - *this) * alpha) + *this;
+		}
+
+		Vector3f Vector3f::Rotate(const Quaternion& rotation)
+		{
+			Quaternion conjugate = rotation.Conjugate();
+			Quaternion w = rotation * (*this) * conjugate;
+			return {w.x, w.y, w.z};
 		}
 
 		std::string Vector3f::ToString() const

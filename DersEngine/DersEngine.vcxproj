@@ -32,6 +32,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\MathLibrary\Matrix4f.cpp" />
     <ClCompile Include="Source\MathLibrary\Quaternion.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
