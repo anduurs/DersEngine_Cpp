@@ -15,37 +15,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\core\GameApplication.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\core\MessageBus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\systems\System.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Include\Graphics\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Utils\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathLibrary\Vector2f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathLibrary\Vector3f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathLibrary\Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathLibrary\Matrix4f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MathLibrary\MathLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\graphics\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\GameApplication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils\Debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\systems\System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\MessageBus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Source\Graphics\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MathLibrary\Vector2f.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MathLibrary\Vector3f.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MathLibrary\Quaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
