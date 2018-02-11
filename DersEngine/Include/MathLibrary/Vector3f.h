@@ -1,74 +1,144 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 
 namespace DersEngine
 {
 	namespace Maths
 	{
-		class Quaternion;
-
-		class Vector3f
+		struct Vector3f
 		{
-		public:
 			float x;
 			float y;
 			float z;
 
-			Vector3f();
-			Vector3f(float scalar);
-			Vector3f(float x, float y, float z);
+			Vector3f(): x(0.0f), y(0.0f), z(0.0){}
+			Vector3f(float scalar): x(scalar), y(scalar), z(scalar){}
+			Vector3f(float x, float y, float z): x(x), y(y), z(z){}
 
-			static Vector3f Zero();
-			static Vector3f XAxis();
-			static Vector3f YAxis();
-			static Vector3f ZAxis();
+			Vector3f Zero()
+			{
+				return { 0.0f, 0.0f, 0.0f };
+			}
 
-			Vector3f& Add(const Vector3f& vector);
-			Vector3f& Sub(const Vector3f& vector);
-			Vector3f& Mul(const Vector3f& vector);
-			Vector3f& Div(const Vector3f& vector);
+			Vector3f XAxis()
+			{
+				return { 1.0f, 0.0f, 0.0f };
+			}
 
-			Vector3f& Add(float value);
-			Vector3f& Sub(float value);
-			Vector3f& Mul(float value);
-			Vector3f& Div(float value);
+			Vector3f YAxis()
+			{
+				return { 0.0f, 1.0f, 0.0f };
+			}
 
-			friend Vector3f operator+(Vector3f left, const Vector3f& right);
-			friend Vector3f operator-(Vector3f left, const Vector3f& right);
-			friend Vector3f operator*(Vector3f left, const Vector3f& right);
-			friend Vector3f operator/(Vector3f left, const Vector3f& right);
+			Vector3f ZAxis()
+			{
+				return { 0.0f, 0.0f, 1.0f };
+			}
 
-			friend Vector3f operator+(Vector3f left, float value);
-			friend Vector3f operator-(Vector3f left, float value);
-			friend Vector3f operator*(Vector3f left, float value);
-			friend Vector3f operator/(Vector3f left, float value);
+			float Length() const
+			{
+				return sqrt(x * x + y * y + z * z);
+			}
 
-			bool operator==(const Vector3f& vector) const;
-			bool operator!=(const Vector3f& vector) const;
+			Vector3f Normalize() const
+			{
+				float length = Length();
+				return { x / length, y / length , z / length };
+			}
 
-			Vector3f& operator+=(const Vector3f& vector);
-			Vector3f& operator-=(const Vector3f& vector);
-			Vector3f& operator*=(const Vector3f& vector);
-			Vector3f& operator/=(const Vector3f& vector);
+			std::string ToString() const
+			{
+				std::stringstream result;
+				result << "Vector3f(" << x << ", " << y << ", " << z << ")";
+				return result.str();
+			}
 
-			Vector3f& operator+=(float value);
-			Vector3f& operator-=(float value);
-			Vector3f& operator*=(float value);
-			Vector3f& operator/=(float value);
-
-			float Length() const;
-			Vector3f Normalize() const;
-			float Distance(const Vector3f& vector) const;
-			float Dot(const Vector3f& vector) const;
-			Vector3f Cross(const Vector3f& vector) const;
-			Vector3f Lerp(const Vector3f& target, float alpha);
-			Vector3f Rotate(const Quaternion& rotation);
-
-			std::string ToString() const;
-
-			friend std::ostream& operator<<(std::ostream& stream, const Vector3f& vector);
+			friend std::ostream& operator<<(std::ostream& stream, const Vector3f& vector)
+			{
+				stream << vector.ToString();
+				return stream;
+			}
 		};
+
+		Vector3f operator+(const Vector3f& left, const Vector3f& right)
+		{
+			return { left.x + right.x , left.y + right.y, left.z + right.z };
+		}
+
+		Vector3f operator-(const Vector3f& left, const Vector3f& right)
+		{
+			return { left.x - right.x , left.y - right.y, left.z - right.z };
+		}
+
+		Vector3f operator*(const Vector3f& left, const Vector3f& right)
+		{
+			return { left.x * right.x , left.y * right.y, left.z * right.z };
+		}
+
+		Vector3f operator/(const Vector3f& left, const Vector3f& right)
+		{
+			return { left.x / right.x , left.y / right.y, left.z / right.z };
+		}
+
+		Vector3f operator+(const Vector3f& left, float value)
+		{
+			return { left.x + value , left.y + value, left.z + value };
+		}
+
+		Vector3f operator-(const Vector3f& left, float value)
+		{
+			return { left.x - value , left.y - value, left.z - value };
+		}
+
+		Vector3f operator*(const Vector3f& left, float value)
+		{
+			return { left.x * value , left.y * value, left.z * value };
+		}
+
+		Vector3f operator/(const Vector3f& left, float value)
+		{
+			return { left.x / value , left.y / value, left.z / value };
+		}
+
+		void operator+=(Vector3f& left, const Vector3f& right)
+		{
+			left.x = left.x + right.x;
+			left.y = left.y + right.y;
+			left.z = left.z + right.z;
+		}
+
+		void operator-=(Vector3f& left, const Vector3f& right)
+		{
+			left.x = left.x - right.x;
+			left.y = left.y - right.y;
+			left.z = left.z - right.z;
+		}
+
+		void operator*=(Vector3f& left, const Vector3f& right)
+		{
+			left.x = left.x * right.x;
+			left.y = left.y * right.y;
+			left.z = left.z * right.z;
+		}
+
+		void operator/=(Vector3f& left, const Vector3f& right)
+		{
+			left.x = left.x / right.x;
+			left.y = left.y / right.y;
+			left.z = left.z / right.z;
+		}
+
+		bool operator==(const Vector3f& left, const Vector3f& right)
+		{
+			return left.x == right.x && left.y == right.y && left.z == right.z;
+		}
+
+		bool operator!=(const Vector3f& left, const Vector3f& right)
+		{
+			return !(left == right);
+		}
 	}
 }
 

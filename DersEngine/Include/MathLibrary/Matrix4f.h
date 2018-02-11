@@ -1,14 +1,18 @@
 #pragma once
 
+#include <array>
+
 namespace DersEngine
 {
 	namespace Maths
 	{
-		class Matrix4f
+		struct Matrix4f
 		{
-		private:
+			std::array<float, 16> m_MatrixData = {};
 
-		public:
+
+
+
 		};
 	}
 }

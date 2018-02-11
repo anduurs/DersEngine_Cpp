@@ -1,53 +1,84 @@
 #pragma once
 
+#include <math.h>
+
+#define PI 3.14159265f
+
 namespace DersEngine
 {
 	namespace Maths
 	{
-		class Vector3f;
-		class Matrix4f;
+		struct Vector3f;
 
-		class Quaternion
+		struct Quaternion
 		{
-		public:
 			float x;
 			float y;
 			float z;
 			float w;
 
-			Quaternion();
-			Quaternion(float x, float y, float z, float w);
-			Quaternion(const Vector3f& axis, float angle);
+			Quaternion() : x(0), y(0), z(0), w(1) {}
 
-			Quaternion& Add(const Quaternion& quaternion);
-			Quaternion& Sub(const Quaternion& quaternion);
-			Quaternion& Mul(const Quaternion& quaternion);
-			Quaternion& Mul(float scalar);
-			Quaternion& Mul(const Vector3f& vector);
+			Quaternion(float x, float y, float z, float w) : x(x), y(y), z(z), w(w){}
 
-			friend Quaternion operator+(Quaternion left, const Quaternion& right);
-			friend Quaternion operator-(Quaternion left, const Quaternion& right);
-			friend Quaternion operator*(Quaternion left, const Quaternion& right);
-			friend Quaternion operator*(Quaternion left, const Vector3f& right);
-			friend Quaternion operator*(Quaternion left, float scalar);
+			Quaternion(const Vector3f& axis, float angle)
+			{
+				float rad = angle * PI / 180.0f;
+				
+				float sinHalfAngle = sin(rad / 2.0f);
+				float cosHalfAngle = cos(rad / 2.0f);
 
-			float Length() const;
-			Quaternion Normalize() const;
-			Quaternion Conjugate() const;
-			float Dot(const Quaternion& quaternion) const;
+				x = axis.x * sinHalfAngle;
+				y = axis.y * sinHalfAngle;
+				z = axis.z * sinHalfAngle;
+				w = cosHalfAngle;
+			}
 
-			Matrix4f ToRotationMatrix() const;
+			float Length() const
+			{
+				return sqrt(x * x, y * y, z * z, w * w);
+			}
 
-			Vector3f GetForward() const;
-			Vector3f GetBack() const;
-			Vector3f GetRight() const;
-			Vector3f GetLeft() const;
-			Vector3f GetUp() const;
-			Vector3f GetDown() const;
+			Quaternion Normalize() const 
+			{
+				float length = Length();
+				return { x / length, y / length, z / length, w / length };
+			}
 
-			bool Equals(const Quaternion& quaternion);
-
-			bool operator==(const Quaternion& quaternion) const;
+			Quaternion Conjugate() const
+			{
+				return { -x, -y, -z, -w };
+			}
 		};
+
+		Quaternion operator*(const Quaternion& left, const Quaternion& right)
+		{
+			float x = left.x * right.w + left.w * right.x + left.y * right.z - left.z * right.y;
+			float y = left.y * right.w + left.w * right.y + left.z * right.x - left.x * right.z;
+			float z = left.z * right.w + left.w * right.z + left.x * right.y - left.y * right.x;
+			float w = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
+
+			return { x, y, z, w };
+		}
+
+		Quaternion operator*(const Quaternion& left, const Vector3f& right)
+		{
+			float x = left.w * right.x + left.y * right.z - left.z * right.y;
+			float y = left.w * right.y + left.z * right.x - left.x * right.z;
+			float z = left.w * right.z + left.x * right.y - left.y * right.x;
+			float w = -left.x * right.x - left.y * right.y - left.z * right.z;
+
+			return { x, y, z, w };
+		}
+
+		Quaternion operator+(const Quaternion& left, const Quaternion& right)
+		{
+			return { left.x + right.x , left.y + right.y, left.z + right.z, left.w + right.w };
+		}
+
+		Quaternion operator-(const Quaternion& left, const Quaternion& right)
+		{
+			return { left.x - right.x , left.y - right.y, left.z - right.z, left.w - right.w };
+		}
 	}
 }
