@@ -8,7 +8,7 @@ namespace DersEngine
 	{
 		struct Matrix4f
 		{
-			std::array<float, 16> m_MatrixData = {};
+			std::array<float, 16> m_MatrixData;
 
 
 

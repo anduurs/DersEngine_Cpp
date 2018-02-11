@@ -22,6 +22,7 @@
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
     <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
+    <ClInclude Include="Include\MathLibrary\MathUtil.h" />
     <ClInclude Include="Include\MathLibrary\Matrix4f.h" />
     <ClInclude Include="Include\MathLibrary\Quaternion.h" />
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
@@ -32,6 +33,10 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\MathLibrary\MathLibrary.cpp" />
+    <ClCompile Include="Source\MathLibrary\Quaternion.cpp" />
+    <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
+    <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
