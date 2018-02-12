@@ -1,6 +1,6 @@
 #pragma once
 
-#include <array>
+#include <string>
 
 namespace DersEngine
 {
@@ -8,11 +8,16 @@ namespace DersEngine
 	{
 		struct Matrix4f
 		{
-			std::array<float, 16> m_MatrixData;
+			float data[16];
 
+			Matrix4f();
 
+			void Identity();
 
-
+			
+			
 		};
+
+
 	}
 }

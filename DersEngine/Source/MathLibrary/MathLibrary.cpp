@@ -2,6 +2,7 @@
 #include "MathLibrary\Vector2f.h"
 #include "MathLibrary\Vector3f.h"
 #include "MathLibrary\Quaternion.h"
+#include "MathLibrary\Matrix4f.h"
 
 namespace DersEngine
 {
@@ -74,6 +75,10 @@ namespace DersEngine
 
 		/* 4x4 MATRIX OPERATIONS */
 
-
+		Matrix4f Maths::Translate(float x, float y, float z)
+		{
+			//col + row * 4
+			return Matrix4f();
+		}
 	}
 }

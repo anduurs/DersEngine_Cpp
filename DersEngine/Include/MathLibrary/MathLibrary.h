@@ -35,6 +35,7 @@ namespace DersEngine
 
 		/* 4x4 MATRIX OPERATIONS */
 
+		Matrix4f Translate(float x, float y, float z);
 
 	}
 }

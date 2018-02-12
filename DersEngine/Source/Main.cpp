@@ -7,6 +7,8 @@ using namespace Debug;
 
 int main()
 {
+	
+
 	Vector3f vec1 = { 2.0f, 1.0f, 5.0f };
 	Vector3f vec2 = { 5.0f, 9.0f, 3.0f };
 
