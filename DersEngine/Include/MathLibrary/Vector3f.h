@@ -15,11 +15,6 @@ namespace DersEngine
 			Vector3f(float scalar);
 			Vector3f(float x, float y, float z);
 
-			Vector3f Zero();
-			Vector3f XAxis();
-			Vector3f YAxis();
-			Vector3f ZAxis();
-
 			float Length() const;
 			Vector3f Normalize() const;
 			std::string ToString() const;

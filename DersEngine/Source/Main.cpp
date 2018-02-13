@@ -7,7 +7,9 @@ using namespace Debug;
 
 int main()
 {
+	Matrix4f mat = Maths::Translate(Matrix4f(), 1, 2, 3);
 	
+	Log(mat.ToString().c_str());
 
 	Vector3f vec1 = { 2.0f, 1.0f, 5.0f };
 	Vector3f vec2 = { 5.0f, 9.0f, 3.0f };

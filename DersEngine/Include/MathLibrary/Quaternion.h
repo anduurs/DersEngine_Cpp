@@ -9,8 +9,6 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		//struct Vector3f;
-
 		struct Quaternion
 		{
 			float x, y, z, w;
@@ -26,32 +24,46 @@ namespace DersEngine
 
 		inline Quaternion operator*(const Quaternion& left, const Quaternion& right)
 		{
-			float x = left.x * right.w + left.w * right.x + left.y * right.z - left.z * right.y;
-			float y = left.y * right.w + left.w * right.y + left.z * right.x - left.x * right.z;
-			float z = left.z * right.w + left.w * right.z + left.x * right.y - left.y * right.x;
-			float w = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
-
-			return { x, y, z, w };
+			return 
+			{ 
+				left.x * right.w + left.w * right.x + left.y * right.z - left.z * right.y,
+				left.y * right.w + left.w * right.y + left.z * right.x - left.x * right.z, 
+				left.z * right.w + left.w * right.z + left.x * right.y - left.y * right.x,
+				left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z 
+			};
 		}
 
 		inline Quaternion operator*(const Quaternion& left, const Vector3f& right)
 		{
-			float x = left.w * right.x + left.y * right.z - left.z * right.y;
-			float y = left.w * right.y + left.z * right.x - left.x * right.z;
-			float z = left.w * right.z + left.x * right.y - left.y * right.x;
-			float w = -left.x * right.x - left.y * right.y - left.z * right.z;
-
-			return { x, y, z, w };
+			return 
+			{
+				left.w * right.x + left.y * right.z - left.z * right.y, 
+				left.w * right.y + left.z * right.x - left.x * right.z, 
+				left.w * right.z + left.x * right.y - left.y * right.x,
+			   -left.x * right.x - left.y * right.y - left.z * right.z 
+			};
 		}
 
 		inline Quaternion operator+(const Quaternion& left, const Quaternion& right)
 		{
-			return { left.x + right.x , left.y + right.y, left.z + right.z, left.w + right.w };
+			return 
+			{ 
+				left.x + right.x , 
+				left.y + right.y, 
+				left.z + right.z, 
+				left.w + right.w 
+			};
 		}
 
 		inline Quaternion operator-(const Quaternion& left, const Quaternion& right)
 		{
-			return { left.x - right.x , left.y - right.y, left.z - right.z, left.w - right.w };
+			return 
+			{ 
+				left.x - right.x , 
+				left.y - right.y, 
+				left.z - right.z, 
+				left.w - right.w 
+			};
 		}
 	}
 }

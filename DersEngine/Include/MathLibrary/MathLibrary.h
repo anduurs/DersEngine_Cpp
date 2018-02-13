@@ -29,13 +29,14 @@ namespace DersEngine
 
 		Vector3f Rotate(const Vector3f& vector, const Quaternion& rotation);
 
+
 		/* QUATERNION OPERATIONS */
 
 		float Dot(const Quaternion& quat1, const Quaternion& quat2);
 
 		/* 4x4 MATRIX OPERATIONS */
 
-		Matrix4f Translate(float x, float y, float z);
+		Matrix4f Translate(Matrix4f& mat, float x, float y, float z);
 
 	}
 }

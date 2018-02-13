@@ -75,10 +75,16 @@ namespace DersEngine
 
 		/* 4x4 MATRIX OPERATIONS */
 
-		Matrix4f Maths::Translate(float x, float y, float z)
+		Matrix4f Maths::Translate(Matrix4f& mat, float x, float y, float z)
 		{
 			//col + row * 4
-			return Matrix4f();
+			mat.Identity();
+
+			mat.data[3 + 0 * 4] = x;
+			mat.data[3 + 1 * 4] = y;
+			mat.data[3 + 2 * 4] = z;
+			
+			return mat;
 		}
 	}
 }
