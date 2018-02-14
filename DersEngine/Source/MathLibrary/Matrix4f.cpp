@@ -23,6 +23,7 @@ namespace DersEngine
 		std::string Matrix4f::ToString() const
 		{
 			std::stringstream result;
+
 			for (int y = 0; y < 4; y++)
 			{
 				for (int x = 0; x < 4; x++)
@@ -39,6 +40,27 @@ namespace DersEngine
 		{
 			stream << mat.ToString();
 			return stream;
+		}
+
+		Matrix4f Maths::operator*(const Matrix4f& mat1, const Matrix4f& mat2)
+		{
+			Matrix4f res;
+			
+			for (int row = 0; row < 4; row++)
+			{
+				for (int col = 0; col < 4; col++)
+				{
+					float sum = 0.0f;
+
+					for (int e = 0; e < 4; e++)
+					{
+						sum += mat1.data[e + row * 4] * mat2.data[col + e * 4];
+					}
+					res.data[col + row * 4] = sum;
+				}
+			}
+			
+			return res;
 		}
 
 	}

@@ -22,6 +22,7 @@ namespace DersEngine
 			
 		};
 
-
+		Matrix4f operator*(const Matrix4f& mat1, const Matrix4f& mat2);
+		
 	}
 }

@@ -15,11 +15,14 @@ namespace DersEngine
 
 			Quaternion();
 			Quaternion(float x, float y, float z, float w);
-			Quaternion(const Vector3f& axis, float angle);
-
+			
 			float Length() const;
 			Quaternion Normalize() const;
 			Quaternion Conjugate() const;
+
+			Vector3f GetForward() const;
+			Vector3f GetUp() const;
+			Vector3f GetRight() const;
 		};
 
 		inline Quaternion operator*(const Quaternion& left, const Quaternion& right)
@@ -48,7 +51,7 @@ namespace DersEngine
 		{
 			return 
 			{ 
-				left.x + right.x , 
+				left.x + right.x, 
 				left.y + right.y, 
 				left.z + right.z, 
 				left.w + right.w 
@@ -59,11 +62,21 @@ namespace DersEngine
 		{
 			return 
 			{ 
-				left.x - right.x , 
+				left.x - right.x, 
 				left.y - right.y, 
 				left.z - right.z, 
 				left.w - right.w 
 			};
+		}
+
+		inline bool operator==(const Quaternion& left, const Quaternion& right)
+		{
+			return left.x == right.x && left.y == right.y && left.z == right.z && left.w == right.w;
+		}
+
+		inline bool operator!=(const Quaternion& left, const Quaternion& right)
+		{
+			return !(left == right);
 		}
 	}
 }

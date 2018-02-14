@@ -19,6 +19,8 @@ namespace DersEngine
 			Vector3f Normalize() const;
 			std::string ToString() const;
 
+			
+
 			friend std::ostream& operator<<(std::ostream& stream, const Vector3f& vector);
 		};
 

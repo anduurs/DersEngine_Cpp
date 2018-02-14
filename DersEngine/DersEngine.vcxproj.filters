@@ -39,7 +39,7 @@
     <ClInclude Include="Include\Core\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MathLibrary\MathUtil.h">
+    <ClInclude Include="Include\MathLibrary\MathHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "MathLibrary\Quaternion.h"
 #include "MathLibrary\Vector3f.h"
+#include "MathLibrary\MathLibrary.h"
 
 namespace DersEngine
 {
@@ -10,23 +11,9 @@ namespace DersEngine
 		Quaternion::Quaternion(float x, float y, float z, float w) 
 			: x(x), y(y), z(z), w(w) {}
 
-		Quaternion::Quaternion(const Vector3f& axis, float angle)
-		{
-			float rad = angle * PI / 180.0f;
-
-			float sinHalfAngle = sin(rad / 2.0f);
-			float cosHalfAngle = cos(rad / 2.0f);
-
-			x = axis.x * sinHalfAngle;
-			y = axis.y * sinHalfAngle;
-			z = axis.z * sinHalfAngle;
-			w = cosHalfAngle;
-		}
-
 		float Quaternion::Length() const
 		{
-			float len = x * x + y * y + z * z + w * w;
-			return sqrt(len);
+			return sqrt(x * x + y * y + z * z + w * w);
 		}
 
 		Quaternion Quaternion::Normalize() const
@@ -37,7 +24,22 @@ namespace DersEngine
 
 		Quaternion Quaternion::Conjugate() const
 		{
-			return { -x, -y, -z, -w };
+			return { -x, -y, -z, w };
+		}
+
+		Vector3f Quaternion::GetForward() const
+		{
+			return Rotate(Vector3f(0, 0, 1), *this).Normalize();
+		}
+
+		Vector3f Quaternion::GetUp() const
+		{
+			return Rotate(Vector3f(0, 1, 0), *this).Normalize();
+		}
+
+		Vector3f Quaternion::GetRight() const
+		{
+			return Rotate(Vector3f(1, 0, 0), *this).Normalize();
 		}
 	}
 }

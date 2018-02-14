@@ -1,5 +1,7 @@
 #pragma once
 
+#define PI 3.14159265f
+
 namespace DersEngine
 {
 	namespace Maths
@@ -8,6 +10,12 @@ namespace DersEngine
 		struct Vector3f;
 		struct Quaternion;
 		struct Matrix4f;
+
+		/* HELPER FUNCTIONS */
+
+		float ToRadians(float degrees);
+
+		float ToDegrees(float radians);
 
 		/* 2D VECTOR OPERATIONS */
 
@@ -34,9 +42,36 @@ namespace DersEngine
 
 		float Dot(const Quaternion& quat1, const Quaternion& quat2);
 
+		Quaternion MakeQuaternion(const Vector3f& axis, float angle);
+
+		Quaternion ToQuaternion(float roll, float pitch, float yaw);
+
+		Vector3f ToEuler(const Quaternion& q);
+
+		Matrix4f ToRotationMatrix(const Quaternion& quat);
+
+
 		/* 4x4 MATRIX OPERATIONS */
 
 		Matrix4f Translate(Matrix4f& mat, float x, float y, float z);
+
+		Matrix4f Scale(Matrix4f& mat, float x, float y, float z);
+
+		Matrix4f Rotate(Matrix4f& mat, const Vector3f& axis, float angle);
+
+		Matrix4f Rotate(Matrix4f& mat, const Quaternion& quat);
+
+		Matrix4f Perspective(Matrix4f& mat, float fieldOfView, float aspectRatio, float zNear, float zFar);
+
+		Matrix4f Ortho(Matrix4f& mat, float left, float right, float bottom, float top, float near, float far);
+
+		Matrix4f LookAt(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right);
+
+		Matrix4f Basis(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right);
+
+		Matrix4f Invers(Matrix4f& mat);
+
+		Matrix4f Transpose(Matrix4f& mat);
 
 	}
 }
