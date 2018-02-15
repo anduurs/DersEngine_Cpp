@@ -15,11 +15,14 @@ namespace DersEngine
 			Vector3f(float scalar);
 			Vector3f(float x, float y, float z);
 
+			static Vector3f XAxis();
+			static Vector3f YAxis();
+			static Vector3f ZAxis();
+			static Vector3f Zero();
+
 			float Length() const;
 			Vector3f Normalize() const;
 			std::string ToString() const;
-
-			
 
 			friend std::ostream& operator<<(std::ostream& stream, const Vector3f& vector);
 		};

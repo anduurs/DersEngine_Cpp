@@ -1,6 +1,5 @@
 #pragma once
 
-#include <math.h>
 #include "Vector3f.h"
 
 #define PI 3.14159265f
@@ -15,14 +14,22 @@ namespace DersEngine
 
 			Quaternion();
 			Quaternion(float x, float y, float z, float w);
+			Quaternion(const Vector3f& axis, float angle);
 			
 			float Length() const;
 			Quaternion Normalize() const;
 			Quaternion Conjugate() const;
+			Quaternion Identity() const;
 
 			Vector3f GetForward() const;
 			Vector3f GetUp() const;
 			Vector3f GetRight() const;
+
+			inline Vector3f GetXYZ() const { return { x, y, z }; }
+
+			std::string ToString() const;
+
+			friend std::ostream& operator<<(std::ostream& stream, const Quaternion& vector);
 		};
 
 		inline Quaternion operator*(const Quaternion& left, const Quaternion& right)

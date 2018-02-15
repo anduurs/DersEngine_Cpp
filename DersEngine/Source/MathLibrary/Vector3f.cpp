@@ -9,6 +9,26 @@ namespace DersEngine
 		Vector3f::Vector3f(float scalar) : x(scalar), y(scalar), z(scalar) {}
 		Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
+		Vector3f Vector3f::XAxis()
+		{
+			return { -1.0f, 0.0f, 0.0f };
+		}
+
+		Vector3f Vector3f::YAxis()
+		{
+			return {0.0f, 1.0f, 0.0f};
+		}
+
+		Vector3f Vector3f::ZAxis()
+		{
+			return { 0.0f, 0.0f, 1.0f };
+		}
+
+		Vector3f Vector3f::Zero()
+		{
+			return { 0.0f, 0.0f, 0.0f };
+		}
+
 		float Vector3f::Length() const
 		{
 			return sqrt(x * x + y * y + z * z);
