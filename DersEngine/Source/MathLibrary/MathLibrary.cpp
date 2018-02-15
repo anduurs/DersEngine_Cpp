@@ -104,6 +104,11 @@ namespace DersEngine
 			return { quat.x, quat.y, quat.z };
 		}
 
+		Vector3f GetAxis(const Quaternion& quat)
+		{
+			return Vector3f(quat.x, quat.y, quat.z).Normalize();
+		}
+
 		/* QUATERNION OPERATIONS */
 
 		float Dot(const Quaternion& quat1, const Quaternion& quat2)

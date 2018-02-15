@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "Graphics/Window.h"
-#include "Utils/Debug.h"
+#include "Debug/DebugLogger.h"
 
 namespace DersEngine
 {

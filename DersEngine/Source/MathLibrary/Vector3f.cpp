@@ -1,5 +1,4 @@
 #include "MathLibrary\Vector3f.h"
-#include <sstream>
 
 namespace DersEngine
 {

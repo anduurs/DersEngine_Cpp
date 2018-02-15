@@ -77,6 +77,8 @@ namespace DersEngine
 
 		Vector3f Rotate(const Vector3f& vector, const Quaternion& rotation);
 
+		Vector3f GetAxis(const Quaternion& quat);
+
 
 		/* QUATERNION OPERATIONS */
 

@@ -25,9 +25,11 @@
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
     <ClInclude Include="Include\MathLibrary\Matrix4f.h" />
     <ClInclude Include="Include\MathLibrary\Quaternion.h" />
+    <ClInclude Include="Include\MathLibrary\Transform.h" />
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
     <ClInclude Include="Include\MathLibrary\Vector3f.h" />
-    <ClInclude Include="Include\Utils\Debug.h" />
+    <ClInclude Include="Include\Debug\DebugLogger.h" />
+    <ClInclude Include="Include\Utils\FileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp" />
@@ -36,8 +38,10 @@
     <ClCompile Include="Source\MathLibrary\MathLibrary.cpp" />
     <ClCompile Include="Source\MathLibrary\Matrix4f.cpp" />
     <ClCompile Include="Source\MathLibrary\Quaternion.cpp" />
+    <ClCompile Include="Source\MathLibrary\Transform.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
+    <ClCompile Include="Source\Utils\FileManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
