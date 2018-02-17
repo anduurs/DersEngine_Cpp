@@ -48,6 +48,9 @@
     <ClInclude Include="Include\Utils\FileManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Debug\DebugLogging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Graphics\Window.cpp">
@@ -80,5 +83,9 @@
     <ClCompile Include="Source\Utils\FileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\testFragmentShader.frag" />
+    <None Include="Resources\Shaders\testVertexShader.vert" />
   </ItemGroup>
 </Project>

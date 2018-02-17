@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Core\Engine.h" />
+    <ClInclude Include="Include\Debug\DebugLogging.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
     <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
@@ -42,6 +43,10 @@
     <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
     <ClCompile Include="Source\Utils\FileManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\testFragmentShader.frag" />
+    <None Include="Resources\Shaders\testVertexShader.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
