@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
+    <ClInclude Include="Include\Graphics\Mesh.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
     <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
     <ClInclude Include="Include\MathLibrary\Vector3f.h" />
     <ClInclude Include="Include\Debug\DebugLogger.h" />
+    <ClInclude Include="Include\Platform\OpenGL\GLVertexArray.h" />
     <ClInclude Include="Include\Utils\FileManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -144,19 +146,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)DersEngine\Include;$(SolutionDir)Dependencies\GLEW-2.1.0\include;$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DersEngine\Include;$(SolutionDir)Dependencies\GLEW-2.1.0\include;$(SolutionDir)Dependencies\glm;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\assimp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW-2.1.0\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW-2.1.0\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\assimp\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;assimp-vc140-mt.lib</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW-2.1.0\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2015</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
