@@ -71,7 +71,7 @@ namespace DersEngine
 		void Window::SwapBuffers()
 		{
 			//TODO: Move this to render engine later
-			glClearColor(0, 0.2, 0.3, 0);
+			glClearColor(0, 0.2f, 0.3f, 0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			glfwSwapBuffers(m_Window);
