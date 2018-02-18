@@ -16,6 +16,10 @@ int main()
 	Matrix4f mat = Maths::Translate(Matrix4f(), 3, 8, 2);
 	Log(mat.ToString().c_str());
 
+	//Model model;
+	//model = LoadModel("Resources/Models/test.obj", model);
+	// renderer.Submit(model);
+
 	Engine engine = { 800, 600, "DersEngine v0.01", true, false };
 	engine.Start();
 	return 0;

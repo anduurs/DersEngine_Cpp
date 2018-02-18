@@ -9,9 +9,5 @@ namespace DersEngine
 	namespace Utils
 	{
 		std::string ReadFile(const std::string& fileName);
-		
-		void LoadModel(std::string path);
-		
-
 	}
 }

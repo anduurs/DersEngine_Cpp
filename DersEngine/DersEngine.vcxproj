@@ -22,6 +22,11 @@
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
     <ClInclude Include="Include\Graphics\Mesh.h" />
+    <ClInclude Include="Include\Graphics\Model.h" />
+    <ClInclude Include="Include\Graphics\RenderEngine.h" />
+    <ClInclude Include="Include\Graphics\Shader.h" />
+    <ClInclude Include="Include\Graphics\Texture.h" />
+    <ClInclude Include="Include\Graphics\Vertex.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
     <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
@@ -31,10 +36,14 @@
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
     <ClInclude Include="Include\MathLibrary\Vector3f.h" />
     <ClInclude Include="Include\Debug\DebugLogger.h" />
-    <ClInclude Include="Include\Platform\OpenGL\GLVertexArray.h" />
+    <ClInclude Include="Include\Platform\OpenGL\GLRenderer.h" />
+    <ClInclude Include="Include\Platform\OpenGL\GLShader.h" />
+    <ClInclude Include="Include\Platform\OpenGL\GLTextureLoader.h" />
     <ClInclude Include="Include\Utils\FileManager.h" />
+    <ClInclude Include="Include\Utils\ModelLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
@@ -44,7 +53,10 @@
     <ClCompile Include="Source\MathLibrary\Transform.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
+    <ClCompile Include="Source\Platform\OpenGL\GLShader.cpp" />
+    <ClCompile Include="Source\Platform\OpenGL\GLTextureLoader.cpp" />
     <ClCompile Include="Source\Utils\FileManager.cpp" />
+    <ClCompile Include="Source\Utils\ModelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\testFragmentShader.frag" />
