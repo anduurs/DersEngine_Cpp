@@ -10,11 +10,12 @@ namespace DersEngine
 	namespace Graphics
 	{
 		using namespace Maths;
+		using UniformTable = std::unordered_map<std::string, unsigned int>;
 
 		class Shader
 		{
 		private:
-			std::unordered_map<std::string, unsigned int> m_UniformTable;
+			UniformTable m_UniformTable;
 
 			unsigned int m_ShaderProgram;
 

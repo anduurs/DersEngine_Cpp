@@ -102,7 +102,7 @@ namespace DersEngine
 				resultMesh.textures.insert(resultMesh.textures.end(), specularMaps.begin(), specularMaps.end());
 
 				std::vector<Texture> normalMaps =
-					LoadMaterialTextures(material, aiTextureType_NORMALS, TextureType::NORMAL, model);
+					LoadMaterialTextures(material, aiTextureType_HEIGHT, TextureType::NORMAL, model);
 
 				resultMesh.textures.insert(resultMesh.textures.end(), normalMaps.begin(), normalMaps.end());
 			}
