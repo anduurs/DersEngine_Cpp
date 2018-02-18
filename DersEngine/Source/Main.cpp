@@ -2,6 +2,7 @@
 #include "MathLibrary/MathHeaders.h"
 #include "Debug/DebugLogging.h"
 #include "Utils\FileManager.h"
+#include "Utils\ModelLoader.h"
 
 #include<time.h>
 #include<iostream>
@@ -13,9 +14,6 @@ using namespace Utils;
 
 int main()
 {	
-	Matrix4f mat = Maths::Translate(Matrix4f(), 3, 8, 2);
-	Log(mat.ToString().c_str());
-
 	//Model model;
 	//model = LoadModel("Resources/Models/test.obj", model);
 	// renderer.Submit(model);

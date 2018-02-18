@@ -20,7 +20,7 @@ namespace DersEngine
 				Debug::Log("ERROR::ASSIMP::", importer.GetErrorString());
 				return {};
 			}
-
+			
 			model.directory = path.substr(0, path.find_last_of('/'));
 
 			ProcessNode(scene->mRootNode, scene, model);
@@ -85,24 +85,24 @@ namespace DersEngine
 			if (mesh->mMaterialIndex >= 0)
 			{
 				aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
+				
 				std::vector<Texture> noTextureMaps =
-					LoadMaterialTextures(material, aiTextureType_NONE, TextureMap::NONE, model);
+					LoadMaterialTextures(material, aiTextureType_NONE, TextureType::NONE, model);
 
 				resultMesh.textures.insert(resultMesh.textures.end(), noTextureMaps.begin(), noTextureMaps.end());
 
 				std::vector<Texture> diffuseMaps = 
-					LoadMaterialTextures(material, aiTextureType_DIFFUSE, TextureMap::DIFFUSE, model);
+					LoadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::DIFFUSE, model);
 
 				resultMesh.textures.insert(resultMesh.textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
 				std::vector<Texture> specularMaps =
-					LoadMaterialTextures(material, aiTextureType_SPECULAR, TextureMap::SPECULAR, model);
+					LoadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::SPECULAR, model);
 
 				resultMesh.textures.insert(resultMesh.textures.end(), specularMaps.begin(), specularMaps.end());
 
 				std::vector<Texture> normalMaps =
-					LoadMaterialTextures(material, aiTextureType_NORMALS, TextureMap::NORMAL, model);
+					LoadMaterialTextures(material, aiTextureType_NORMALS, TextureType::NORMAL, model);
 
 				resultMesh.textures.insert(resultMesh.textures.end(), normalMaps.begin(), normalMaps.end());
 			}
@@ -111,19 +111,19 @@ namespace DersEngine
 		}
 
 		std::vector<Texture> LoadMaterialTextures(aiMaterial* material,
-			aiTextureType type, TextureMap textureType, Model& model)
+			aiTextureType type, TextureType textureType, Model& model)
 		{
 			std::vector<Texture> textures;
 
 			for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
 			{
-				aiString str;
-				material->GetTexture(type, i, &str);
+				aiString textureFilePath;
+				material->GetTexture(type, i, &textureFilePath);
 				bool skip = false;
 
 				for (unsigned int j = 0; j < model.loadedTextures.size(); j++)
 				{
-					if (std::strcmp(model.loadedTextures[j].path.data(), str.C_Str()) == 0)
+					if (std::strcmp(model.loadedTextures[j].path.data(), textureFilePath.C_Str()) == 0)
 					{
 						textures.emplace_back(model.loadedTextures[j]);
 						skip = true;
@@ -134,9 +134,9 @@ namespace DersEngine
 				if (!skip)
 				{  
 					Texture texture;
-					texture.id = OpenGL_API::LoadTexture(str.C_Str());//TextureFromFile(str.C_Str(), directory);
-					texture.textureMap = textureType;
-					texture.path = str.C_Str();
+					texture.id = OpenGL_API::LoadTextureFromFile(textureFilePath.C_Str(), model.directory);
+					texture.type = textureType;
+					texture.path = textureFilePath.C_Str();
 					textures.emplace_back(texture);
 					model.loadedTextures.emplace_back(texture); 
 				}

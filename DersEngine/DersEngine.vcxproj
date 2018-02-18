@@ -35,12 +35,12 @@
     <ClInclude Include="Include\MathLibrary\Transform.h" />
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
     <ClInclude Include="Include\MathLibrary\Vector3f.h" />
-    <ClInclude Include="Include\Debug\DebugLogger.h" />
     <ClInclude Include="Include\Platform\OpenGL\GLRenderer.h" />
     <ClInclude Include="Include\Platform\OpenGL\GLShader.h" />
     <ClInclude Include="Include\Platform\OpenGL\GLTextureLoader.h" />
     <ClInclude Include="Include\Utils\FileManager.h" />
     <ClInclude Include="Include\Utils\ModelLoader.h" />
+    <ClInclude Include="Include\Utils\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Graphics\Shader.cpp" />
@@ -57,6 +57,7 @@
     <ClCompile Include="Source\Platform\OpenGL\GLTextureLoader.cpp" />
     <ClCompile Include="Source\Utils\FileManager.cpp" />
     <ClCompile Include="Source\Utils\ModelLoader.cpp" />
+    <ClCompile Include="Source\Utils\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\testFragmentShader.frag" />

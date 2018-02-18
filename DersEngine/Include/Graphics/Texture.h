@@ -6,7 +6,7 @@ namespace DersEngine
 {
 	namespace Graphics
 	{
-		enum TextureMap
+		enum TextureType
 		{
 			NONE,
 			DIFFUSE,
@@ -20,7 +20,7 @@ namespace DersEngine
 		struct Texture
 		{
 			unsigned int id;
-			TextureMap textureMap;
+			TextureType type;
 			std::string path;
 		};
 	}
