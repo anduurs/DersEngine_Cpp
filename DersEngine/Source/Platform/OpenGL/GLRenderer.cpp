@@ -35,12 +35,19 @@ namespace DersEngine
 
 				glBindVertexArray(0);
 
-				mesh.VAO = vao;
+				mesh.vaoID = vao;
 			}
 
-			void RenderMesh(const Mesh& mesh)
+			void InitDrawCall(const Mesh& mesh)
 			{
+				glBindVertexArray(mesh.vaoID);
+				glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+			}
 
+			void BindTexture(unsigned int textureID, unsigned int textureSlot)
+			{
+				glActiveTexture(GL_TEXTURE0 + textureSlot);
+				glBindTexture(GL_TEXTURE_2D, textureID);
 			}
 		}
 	}

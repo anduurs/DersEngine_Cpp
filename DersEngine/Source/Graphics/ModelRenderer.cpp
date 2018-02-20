@@ -1,12 +1,13 @@
 #include "Graphics\RenderEngine.h"
 #include "Platform\OpenGL\GLRenderer.h"
 #include "Graphics\Model.h"
+#include "Graphics\Shader.h"
 
 namespace DersEngine
 {
 	namespace Graphics
 	{
-		void RenderEngine::Submit(Model& model)
+		void ModelRenderer::Submit(Model& model)
 		{
 			for (auto& mesh : model.meshes)
 			{
@@ -16,13 +17,24 @@ namespace DersEngine
 			m_Models.emplace_back(model);
 		}
 
-		void RenderEngine::Render()
+		void ModelRenderer::Render()
 		{
 			for (const auto& model : m_Models)
 			{
 				for (const auto& mesh : model.meshes)
 				{
-					OpenGL_API::RenderMesh(mesh);
+					Material* meshMaterial = mesh.material;
+
+					meshMaterial->shader->Bind();
+
+					for (unsigned int i = 0; i < meshMaterial->textures.size(); i++)
+					{
+						OpenGL_API::BindTexture(texture.id, i);
+					}
+
+					
+
+					OpenGL_API::InitDrawCall(mesh);
 				}
 			}
 		}

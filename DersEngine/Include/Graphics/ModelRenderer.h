@@ -8,7 +8,7 @@ namespace DersEngine
 	{
 		struct Model;
 
-		class RenderEngine
+		class ModelRenderer
 		{
 		private:
 			std::vector<Model> m_Models;

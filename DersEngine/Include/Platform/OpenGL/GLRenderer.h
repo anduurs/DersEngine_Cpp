@@ -11,7 +11,8 @@ namespace DersEngine
 		namespace OpenGL_API
 		{
 			void UploadMeshData(Mesh& mesh);
-			void RenderMesh(const Mesh& mesh);
+			void InitDrawCall(const Mesh& mesh);
+			void BindTexture(unsigned int textureID, unsigned int textureSlot);
 		}
 	}
 }

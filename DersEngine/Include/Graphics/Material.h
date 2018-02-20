@@ -14,7 +14,8 @@ namespace DersEngine
 
 		struct Material
 		{
-			Shader shader;
+			unsigned int id;
+			Shader* shader;
 			std::vector<Texture> textures;
 
 			Vector3f baseColor;

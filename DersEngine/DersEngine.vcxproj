@@ -24,7 +24,7 @@
     <ClInclude Include="Include\Graphics\Material.h" />
     <ClInclude Include="Include\Graphics\Mesh.h" />
     <ClInclude Include="Include\Graphics\Model.h" />
-    <ClInclude Include="Include\Graphics\RenderEngine.h" />
+    <ClInclude Include="Include\Graphics\ModelRenderer.h" />
     <ClInclude Include="Include\Graphics\Shader.h" />
     <ClInclude Include="Include\Graphics\ShaderFactory.h" />
     <ClInclude Include="Include\Graphics\Texture.h" />
@@ -45,7 +45,7 @@
     <ClInclude Include="Include\Utils\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Graphics\RenderEngine.cpp" />
+    <ClCompile Include="Source\Graphics\ModelRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />

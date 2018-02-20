@@ -25,6 +25,8 @@ namespace DersEngine
 
 			ProcessNode(scene->mRootNode, scene, model);
 
+			model.loadedTextures.clear();
+
 			return model;
 		}
 
@@ -84,27 +86,30 @@ namespace DersEngine
 
 			if (mesh->mMaterialIndex >= 0)
 			{
-				aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-				
-				std::vector<Texture> noTextureMaps =
+				unsigned int materialIndex = mesh->mMaterialIndex;
+				aiMaterial* material = scene->mMaterials[materialIndex];
+				Material* meshMaterial = resultMesh.material;
+				meshMaterial->id = materialIndex;
+
+				std::vector<Texture> defaultTextures =
 					LoadMaterialTextures(material, aiTextureType_NONE, TextureType::NONE, model);
 
-				resultMesh.textures.insert(resultMesh.textures.end(), noTextureMaps.begin(), noTextureMaps.end());
+				meshMaterial->textures.insert(meshMaterial->textures.end(), defaultTextures.begin(), defaultTextures.end());
 
 				std::vector<Texture> diffuseMaps = 
 					LoadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::DIFFUSE, model);
 
-				resultMesh.textures.insert(resultMesh.textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+				meshMaterial->textures.insert(meshMaterial->textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
 				std::vector<Texture> specularMaps =
 					LoadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::SPECULAR, model);
 
-				resultMesh.textures.insert(resultMesh.textures.end(), specularMaps.begin(), specularMaps.end());
+				meshMaterial->textures.insert(meshMaterial->textures.end(), specularMaps.begin(), specularMaps.end());
 
 				std::vector<Texture> normalMaps =
 					LoadMaterialTextures(material, aiTextureType_HEIGHT, TextureType::NORMAL, model);
 
-				resultMesh.textures.insert(resultMesh.textures.end(), normalMaps.begin(), normalMaps.end());
+				meshMaterial->textures.insert(meshMaterial->textures.end(), normalMaps.begin(), normalMaps.end());
 			}
 
 			return resultMesh;
@@ -119,6 +124,7 @@ namespace DersEngine
 			{
 				aiString textureFilePath;
 				material->GetTexture(type, i, &textureFilePath);
+				
 				bool skip = false;
 
 				for (unsigned int j = 0; j < model.loadedTextures.size(); j++)
