@@ -38,9 +38,13 @@ namespace DersEngine
 				mesh.vaoID = vao;
 			}
 
-			void InitDrawCall(const Mesh& mesh)
+			void Begin(const Mesh& mesh)
 			{
 				glBindVertexArray(mesh.vaoID);
+			}
+
+			void InitDrawCall(const Mesh& mesh)
+			{
 				glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 			}
 

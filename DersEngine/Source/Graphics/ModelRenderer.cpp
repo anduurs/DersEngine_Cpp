@@ -32,8 +32,6 @@ namespace DersEngine
 						OpenGL_API::BindTexture(texture.id, i);
 					}
 
-					
-
 					OpenGL_API::InitDrawCall(mesh);
 				}
 			}

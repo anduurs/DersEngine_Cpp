@@ -81,9 +81,6 @@
     <ClInclude Include="Include\Graphics\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Graphics\ShaderFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Graphics\ModelRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -26,7 +26,6 @@
     <ClInclude Include="Include\Graphics\Model.h" />
     <ClInclude Include="Include\Graphics\ModelRenderer.h" />
     <ClInclude Include="Include\Graphics\Shader.h" />
-    <ClInclude Include="Include\Graphics\ShaderFactory.h" />
     <ClInclude Include="Include\Graphics\Texture.h" />
     <ClInclude Include="Include\Graphics\Vertex.h" />
     <ClInclude Include="Include\Graphics\Window.h" />

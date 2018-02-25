@@ -1,13 +1,29 @@
 #version 330 core
 
-in vec2 position;
+layout(location = 0) in vec4 position;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 textureCoord;
 
-out vec2 textureCoords;
+out VS_Data
+{
+	vec4 worldPosition;
+	vec3 normal;
+	vec2 textureCoord;
+	vec3 cameraViewDirection;
+} vs_out;
 
 uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 
-void main(){
-	//calculate the texture coordinates based on the vertex position
-	textureCoords = vec2((position.x + 1.0) / 2.0, 1 - (position.y + 1.0) / 2.0);
-	gl_Position = modelMatrix * vec4(position, 0.0, 1.0);
+void main()
+{
+	vec4 worldPosition = modelMatrix * position;
+
+	vs_out.worldPosition = worldPosition;
+	vs_out.normal = normal;
+	vs_out.textureCoord = textureCoord;
+	vs_out.cameraViewDirection = normalize((inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)) - worldPosition);
+	
+	gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

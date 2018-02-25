@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-
 namespace DersEngine
 {
 	namespace Utils
