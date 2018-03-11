@@ -1,6 +1,8 @@
 #include "Utils\ModelLoader.h"
 #include "Debug\DebugLogging.h"
 #include "Platform\OpenGL\GLTextureLoader.h"
+#include "Platform\OpenGL\GLRenderer.h"
+#include "Graphics\Vertex.h"
 
 namespace DersEngine
 {
@@ -20,12 +22,8 @@ namespace DersEngine
 				Debug::Log("ERROR::ASSIMP::", importer.GetErrorString());
 				return {};
 			}
-			
-			model.directory = path.substr(0, path.find_last_of('/'));
-
+		
 			ProcessNode(scene->mRootNode, scene, model);
-
-			model.loadedTextures.clear();
 
 			return model;
 		}
@@ -48,7 +46,12 @@ namespace DersEngine
 		{
 			Mesh resultMesh;
 
-			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+			std::vector<Vertex> vertices;
+			std::vector<unsigned int> indices;
+
+			unsigned int numOfVertices = mesh->mNumVertices;
+
+			for (unsigned int i = 0; i < numOfVertices; i++)
 			{
 				Vertex vertex;
 
@@ -71,7 +74,7 @@ namespace DersEngine
 					vertex.textureCoordinate.y = 0.0f;
 				}
 
-				resultMesh.vertices.emplace_back(vertex);
+				vertices.emplace_back(vertex);
 			}
 
 			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -80,75 +83,14 @@ namespace DersEngine
 
 				for (unsigned int j = 0; j < face.mNumIndices; j++)
 				{
-					resultMesh.indices.emplace_back(face.mIndices[i]);
+					indices.emplace_back(face.mIndices[i]);
 				}
 			}
 
-			if (mesh->mMaterialIndex >= 0)
-			{
-				unsigned int materialIndex = mesh->mMaterialIndex;
-				aiMaterial* material = scene->mMaterials[materialIndex];
-				Material* meshMaterial = resultMesh.material;
-				meshMaterial->id = materialIndex;
-
-				std::vector<Texture> defaultTextures =
-					LoadMaterialTextures(material, aiTextureType_NONE, TextureType::NONE, model);
-
-				meshMaterial->textures.insert(meshMaterial->textures.end(), defaultTextures.begin(), defaultTextures.end());
-
-				std::vector<Texture> diffuseMaps = 
-					LoadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::DIFFUSE, model);
-
-				meshMaterial->textures.insert(meshMaterial->textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-
-				std::vector<Texture> specularMaps =
-					LoadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::SPECULAR, model);
-
-				meshMaterial->textures.insert(meshMaterial->textures.end(), specularMaps.begin(), specularMaps.end());
-
-				std::vector<Texture> normalMaps =
-					LoadMaterialTextures(material, aiTextureType_HEIGHT, TextureType::NORMAL, model);
-
-				meshMaterial->textures.insert(meshMaterial->textures.end(), normalMaps.begin(), normalMaps.end());
-			}
+			resultMesh.numOfIndices = indices.size();
+			resultMesh.id = OpenGL_API::UploadMeshData(vertices, indices);
 
 			return resultMesh;
-		}
-
-		std::vector<Texture> LoadMaterialTextures(aiMaterial* material,
-			aiTextureType type, TextureType textureType, Model& model)
-		{
-			std::vector<Texture> textures;
-
-			for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
-			{
-				aiString textureFilePath;
-				material->GetTexture(type, i, &textureFilePath);
-				
-				bool skip = false;
-
-				for (unsigned int j = 0; j < model.loadedTextures.size(); j++)
-				{
-					if (std::strcmp(model.loadedTextures[j].path.data(), textureFilePath.C_Str()) == 0)
-					{
-						textures.emplace_back(model.loadedTextures[j]);
-						skip = true;
-						break;
-					}
-				}
-
-				if (!skip)
-				{  
-					Texture texture;
-					texture.id = OpenGL_API::LoadTextureFromFile(textureFilePath.C_Str(), model.directory);
-					texture.type = textureType;
-					texture.path = textureFilePath.C_Str();
-					textures.emplace_back(texture);
-					model.loadedTextures.emplace_back(texture); 
-				}
-			}
-
-			return textures;
 		}
 	}
 }

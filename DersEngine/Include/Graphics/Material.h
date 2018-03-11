@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "MathLibrary\MathHeaders.h"
 #include "Graphics\Texture.h"
 
 
@@ -9,14 +10,13 @@ namespace DersEngine
 {
 	namespace Graphics
 	{
-		struct Vector2f;
-		struct Vector3f;
+		using namespace Maths;
 		class Shader;
 
-		struct UniformBool
+		struct UniformTextureSampler
 		{
 			std::string name;
-			char value;
+			Texture value;
 		};
 
 		struct UniformInt
@@ -43,18 +43,51 @@ namespace DersEngine
 			Vector3f value;
 		};
 
-		struct Material
+		struct UniformMatrix4f
 		{
-			unsigned int id;
+			std::string name;
+			Matrix4f value;
+		};
 
-			Shader* shader;
+		class Material
+		{
+		protected:
+			Shader* m_Shader;
 
-			std::vector<Texture> textures;
-			std::vector<UniformBool> uniforms_bool;
-			std::vector<UniformInt> uniforms_int;
-			std::vector<UniformFloat> uniforms_float;
-			std::vector<UniformVector2f> uniforms_vector2D;
-			std::vector<UniformVector3f> uniforms_ vector3D;
+			std::vector<UniformTextureSampler> m_Textures;
+			std::vector<UniformTextureSampler> m_TexturesUpdated;
+
+			std::vector<UniformInt> m_IntUniforms;
+			std::vector<UniformInt> m_IntUniformsUpdated;
+
+			std::vector<UniformFloat> m_FloatUniforms;
+			std::vector<UniformFloat> m_FloatUniformsUpdated;
+
+			std::vector<UniformVector2f> m_Vec2Uniforms;
+			std::vector<UniformVector2f> m_Vec2UniformsUpdated;
+
+			std::vector<UniformVector3f> m_Vec3Uniforms;
+			std::vector<UniformVector3f> m_Vec3UniformsUpdated;
+
+			std::vector<UniformMatrix4f> m_Mat4Uniforms;
+			std::vector<UniformMatrix4f> m_Mat4UniformsUpdated;
+
+		public:
+			unsigned int ID;
+
+			Material(Shader* shader);
+			~Material();
+
+			void AddTexture(const std::string& name, Texture texture);
+			void AddInt(const std::string& name, int value);
+			void AddFloat(const std::string& name, float value);
+			void AddVec2(const std::string& name, Vector2f value);
+			void AddVec3(const std::string& name, Vector3f value);
+			void AddMat4(const std::string& name, Matrix4f value);
+
+			void UpdateUniforms();
+
+			inline Shader* GetShader() const { return m_Shader; }
 		};
 
 		

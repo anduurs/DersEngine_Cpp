@@ -81,7 +81,10 @@
     <ClInclude Include="Include\Graphics\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Graphics\ModelRenderer.h">
+    <ClInclude Include="Include\Graphics\ShaderFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Graphics\RenderEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,12 +137,18 @@
     <ClCompile Include="Source\Platform\OpenGL\GLRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\ModelRenderer.cpp">
+    <ClCompile Include="Source\Graphics\ShaderFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\RenderEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\testFragmentShader.frag" />
-    <None Include="Resources\Shaders\testVertexShader.vert" />
+    <None Include="Resources\Shaders\PhongVertexShader.vert" />
+    <None Include="Resources\Shaders\PhongFragmentShader.frag" />
   </ItemGroup>
 </Project>

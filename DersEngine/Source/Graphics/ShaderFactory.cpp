@@ -12,6 +12,8 @@ namespace DersEngine
 			phongShader.AddUniform("modelMatrix");
 			phongShader.AddUniform("viewMatrix");
 			phongShader.AddUniform("projectionMatrix");
+
+			return phongShader;
 		}
 	}
 }

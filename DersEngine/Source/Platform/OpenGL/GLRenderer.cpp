@@ -6,7 +6,7 @@ namespace DersEngine
 	{
 		namespace OpenGL_API
 		{
-			void UploadMeshData(Mesh& mesh)
+			unsigned int UploadMeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
 			{
 				unsigned int vao, vbo, ibo;
 
@@ -15,7 +15,7 @@ namespace DersEngine
 
 				glGenBuffers(1, &vbo);
 				glBindBuffer(GL_ARRAY_BUFFER, vbo);
-				glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(Vertex), &mesh.vertices[0], GL_STATIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 				
 				// store the buffer layout for vertex positions in the vertexarray
 				glEnableVertexAttribArray(0);
@@ -31,21 +31,21 @@ namespace DersEngine
 
 				glGenBuffers(1, &ibo);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(unsigned int), &mesh.indices[0], GL_STATIC_DRAW);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
 				glBindVertexArray(0);
 
-				mesh.vaoID = vao;
+				return vao;
 			}
 
-			void Begin(const Mesh& mesh)
+			void Bind(const Mesh& mesh)
 			{
-				glBindVertexArray(mesh.vaoID);
+				glBindVertexArray(mesh.id);
 			}
 
-			void InitDrawCall(const Mesh& mesh)
+			void Draw(const Mesh& mesh)
 			{
-				glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+				glDrawElements(GL_TRIANGLES, mesh.numOfIndices, GL_UNSIGNED_INT, 0);
 			}
 
 			void BindTexture(unsigned int textureID, unsigned int textureSlot)

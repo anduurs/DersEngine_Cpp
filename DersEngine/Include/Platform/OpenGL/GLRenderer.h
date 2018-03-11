@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 
 #include "Graphics\Mesh.h"
+#include "Graphics\Vertex.h"
 
 namespace DersEngine
 {
@@ -10,9 +11,9 @@ namespace DersEngine
 	{
 		namespace OpenGL_API
 		{
-			void UploadMeshData(Mesh& mesh);
-			void Begin(const Mesh& mesh);
-			void InitDrawCall(const Mesh& mesh);
+			unsigned int UploadMeshData(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+			void Bind(const Mesh& mesh);
+			void Draw(const Mesh& mesh);
 			void BindTexture(unsigned int textureID, unsigned int textureSlot);
 		}
 	}

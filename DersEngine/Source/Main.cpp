@@ -3,7 +3,7 @@
 #include "Debug/DebugLogging.h"
 #include "Utils\FileManager.h"
 #include "Utils\ModelLoader.h"
-#include "Graphics\ModelRenderer.h"
+#include "Graphics\RenderEngine.h"
 #include "Graphics\Shader.h"
 
 #include<time.h>
@@ -19,10 +19,9 @@ int main()
 	Model model;
 	model = LoadModel("Resources/Models/test.obj", model);
 
-	ModelRenderer renderer;
+	Shader shader("Resources/Shaders/", "Resources/Shaders/");
 
-	renderer.Submit(model);
-	// renderer.Submit(model);
+
 
 	Engine engine = { 800, 600, "DersEngine v0.01", true, false };
 	engine.Start();

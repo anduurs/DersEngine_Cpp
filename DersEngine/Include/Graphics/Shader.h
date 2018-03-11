@@ -35,6 +35,8 @@ namespace DersEngine
 			void LoadVector2f(const std::string& uniformName, const Vector2f& vector);
 			void LoadVector3f(const std::string& uniformName, const Vector3f& vector);
 			void LoadMatrix4f(const std::string& uniformName, const Matrix4f& mat);
+
+			inline unsigned int GetID() const { return m_ShaderProgram; };
 		};
 	}
 }
