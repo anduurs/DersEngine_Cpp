@@ -15,7 +15,6 @@ namespace DersEngine
 		void RenderEngine::Render()
 		{
 			
-			
 		}
 	}
 }

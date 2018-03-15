@@ -13,10 +13,9 @@ namespace DersEngine
 
 		class RenderEngine
 		{
-			using MeshTable = std::unordered_map<Material, std::vector<Mesh>>;
 		private:
-			
-			
+			std::vector<Material> m_Materials;
+			std::vector<Mesh> m_Meshes;
 
 		public:
 			void Submit(const Model& model, const Material& material);
