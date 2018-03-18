@@ -22,6 +22,8 @@ namespace DersEngine
 				Debug::Log("ERROR::ASSIMP::", importer.GetErrorString());
 				return {};
 			}
+
+			model.directory = path.substr(0, path.find_last_of('/'));
 		
 			ProcessNode(scene->mRootNode, scene, model);
 
@@ -87,10 +89,68 @@ namespace DersEngine
 				}
 			}
 
+			if (mesh->mMaterialIndex >= 0)
+			{
+				unsigned int materialIndex = mesh->mMaterialIndex;
+				aiMaterial* material = scene->mMaterials[materialIndex];
+				//Material* mat = resultMesh.material;
+
+				std::vector<Texture> diffuseMaps =
+					LoadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::DIFFUSE, model);
+
+				//meshMaterial->textures.insert(meshMaterial->textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+
+				std::vector<Texture> specularMaps =
+					LoadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::SPECULAR, model);
+
+				//meshMaterial->textures.insert(meshMaterial->textures.end(), specularMaps.begin(), specularMaps.end());
+
+				std::vector<Texture> normalMaps =
+					LoadMaterialTextures(material, aiTextureType_HEIGHT, TextureType::NORMAL, model);
+
+				//meshMaterial->textures.insert(meshMaterial->textures.end(), normalMaps.begin(), normalMaps.end());
+			}
+
 			resultMesh.numOfIndices = indices.size();
 			resultMesh.id = OpenGL_API::UploadMeshData(vertices, indices);
 
 			return resultMesh;
+		}
+
+		std::vector<Texture> LoadMaterialTextures(aiMaterial* material,
+			aiTextureType type, TextureType textureType, Model& model)
+		{
+			std::vector<Texture> textures;
+
+			for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
+			{
+				aiString textureFilePath;
+				material->GetTexture(type, i, &textureFilePath);
+
+				bool skip = false;
+
+				for (unsigned int j = 0; j < model.loadedTextures.size(); j++)
+				{
+					if (std::strcmp(model.loadedTextures[j].path.data(), textureFilePath.C_Str()) == 0)
+					{
+						textures.emplace_back(model.loadedTextures[j]);
+						skip = true;
+						break;
+					}
+				}
+
+				if (!skip)
+				{
+					Texture texture;
+					texture.id = OpenGL_API::LoadTextureFromFile(textureFilePath.C_Str(), model.directory);
+					texture.type = textureType;
+					texture.path = textureFilePath.C_Str();
+					textures.emplace_back(texture);
+					model.loadedTextures.emplace_back(texture);
+				}
+			}
+
+			return textures;
 		}
 	}
 }

@@ -12,6 +12,7 @@ namespace DersEngine
 		{
 			unsigned int id;
 			unsigned int numOfIndices;
+			Material* material;
 		};
 	}
 }

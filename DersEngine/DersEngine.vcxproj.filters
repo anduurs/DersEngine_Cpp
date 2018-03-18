@@ -87,6 +87,9 @@
     <ClInclude Include="Include\Graphics\RenderEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Memory\StackAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Graphics\Window.cpp">
@@ -150,5 +153,63 @@
   <ItemGroup>
     <None Include="Resources\Shaders\PhongVertexShader.vert" />
     <None Include="Resources\Shaders\PhongFragmentShader.frag" />
+    <None Include="Resources\Models\TestModel\nanosuit.mtl" />
+    <None Include="Resources\Models\TestModel\nanosuit.fbx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Models\TestModel\arm_dif.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\arm_showroom_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\arm_showroom_spec.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\body_dif.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\body_showroom_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\body_showroom_spec.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\glass_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\glass_dif.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\hand_dif.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\hand_showroom_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\hand_showroom_spec.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\helmet_diff.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\helmet_showroom_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\helmet_showroom_spec.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\leg_dif.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\leg_showroom_ddn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Models\TestModel\leg_showroom_spec.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Models\TestModel\LICENSE.txt" />
   </ItemGroup>
 </Project>

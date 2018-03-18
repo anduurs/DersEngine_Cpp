@@ -20,5 +20,8 @@ namespace DersEngine
 		void ProcessNode(aiNode* node, const aiScene* scene, Model& model);
 
 		Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, Model& model);
+
+		std::vector<Texture> LoadMaterialTextures(aiMaterial* material,
+			aiTextureType type, TextureType textureType, Model& model);
 	}
 }

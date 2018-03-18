@@ -19,10 +19,24 @@ namespace DersEngine
 
 		void Material::AddTexture(const std::string& name, Texture texture)
 		{
-			UniformTextureSampler textureUniform;
-			textureUniform.name = name;
-			textureUniform.value = texture;
-			m_Textures.emplace_back(textureUniform);
+			auto it = std::find_if(m_Textures.begin(), m_Textures.end(),
+				[&](const auto& elem)
+			{
+				return elem.name.compare(name) == 0;
+			});
+
+			if (it == m_Textures.end()) 
+			{
+				UniformTextureSampler textureUniform;
+				textureUniform.name = name;
+				textureUniform.value = texture;
+				m_Textures.emplace_back(textureUniform);
+			}
+			else 
+			{
+
+			}
+			
 		}
 
 		void Material::AddInt(const std::string& name, int value)
@@ -39,10 +53,8 @@ namespace DersEngine
 				uInt.name = name;
 				uInt.value = value;
 				m_IntUniforms.emplace_back(uInt);
-				m_Shader->Bind();
 				m_Shader->AddUniform(name);
 				m_Shader->LoadInteger(name, value);
-				m_Shader->UnBind();
 			}
 			else
 			{
@@ -66,10 +78,8 @@ namespace DersEngine
 				uFloat.name = name;
 				uFloat.value = value;
 				m_FloatUniforms.emplace_back(uFloat);
-				m_Shader->Bind();
 				m_Shader->AddUniform(name);
 				m_Shader->LoadFloat(name, value);
-				m_Shader->UnBind();
 			}
 			else
 			{
@@ -93,10 +103,8 @@ namespace DersEngine
 				uVec2.name = name;
 				uVec2.value = value;
 				m_Vec2Uniforms.emplace_back(uVec2);
-				m_Shader->Bind();
 				m_Shader->AddUniform(name);
 				m_Shader->LoadVector2f(name, value);
-				m_Shader->UnBind();
 			}
 			else
 			{
@@ -120,10 +128,8 @@ namespace DersEngine
 				uVec3.name = name;
 				uVec3.value = value;
 				m_Vec3Uniforms.emplace_back(uVec3);
-				m_Shader->Bind();
 				m_Shader->AddUniform(name);
 				m_Shader->LoadVector3f(name, value);
-				m_Shader->UnBind();
 			}
 			else
 			{
@@ -147,10 +153,8 @@ namespace DersEngine
 				uMat4.name = name;
 				uMat4.value = value;
 				m_Mat4Uniforms.emplace_back(uMat4);
-				m_Shader->Bind();
 				m_Shader->AddUniform(name);
 				m_Shader->LoadMatrix4f(name, value);
-				m_Shader->UnBind();
 			}
 			else
 			{
@@ -162,6 +166,10 @@ namespace DersEngine
 
 		void Material::UpdateUniforms()
 		{
+			for (const auto& uniform : m_TexturesUpdated) {
+				//m_Shader->LoadInteger(uniform.name, uniform.)
+			}
+
 			for (const auto& uniform : m_IntUniformsUpdated)
 			{
 				m_Shader->LoadInteger(uniform.name, uniform.value);

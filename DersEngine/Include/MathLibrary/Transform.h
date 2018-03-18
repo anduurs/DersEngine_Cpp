@@ -11,12 +11,13 @@ namespace DersEngine
 		{
 			Vector3f position;
 			Vector3f scale;
-			Quaternion rotation;
-			
-			Transform();
-			Transform(Vector3f position);
-			Transform(Vector3f position, Vector3f scale);
-			Transform(Vector3f position, Vector3f scale, Quaternion rotation);
+			Quaternion orientation;
+		};
+
+		struct RigidBodyTransform
+		{
+			Vector3f position;
+			Quaternion orientation;
 		};
 	}
 }

@@ -9,18 +9,23 @@ namespace DersEngine
 	{
 		struct Vector2f
 		{
-			float x, y;
-
-			Vector2f();
-			Vector2f(float scalar);
-			Vector2f(float x, float y);
-
-			float Length() const;
-			Vector2f Normalize() const;
-			std::string ToString() const;
-
-			friend std::ostream& operator<<(std::ostream& stream, const Vector2f& vector);
+			float x;
+			float y;
 		};
+
+		float Distance(const Vector2f& vector1, const Vector2f& vector2);
+
+		float Dot(const Vector2f& vector1, const Vector2f& vector2);
+
+		Vector2f Lerp(const Vector2f& start, const Vector2f& target, float alpha);
+
+		float Length(const Vector2f& vector);
+
+		Vector2f Normalize(const Vector2f& vector);
+
+		std::string ToString(const Vector2f& vector);
+
+		std::ostream& operator<<(std::ostream& stream, const Vector2f& vector);
 
 		inline Vector2f operator+(const Vector2f& left, const Vector2f& right)
 		{

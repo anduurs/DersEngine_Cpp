@@ -10,9 +10,12 @@ namespace DersEngine
 		{
 			unsigned int CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 			{
-				const char* vertexShaderCode   = Utils::ReadFile(vertexShaderPath).c_str();
-				const char* fragmentShaderCode = Utils::ReadFile(fragmentShaderPath).c_str();
+				std::string vertexShaderCode   = Utils::ReadFile(vertexShaderPath);
+				std::string fragmentShaderCode = Utils::ReadFile(fragmentShaderPath);
 
+				const char* vsCode = vertexShaderCode.c_str();
+				const char* fsCode = fragmentShaderCode.c_str();
+		
 				unsigned int shaderProgramID;
 				unsigned int vertexShaderID;
 				unsigned int fragmentShaderID;
@@ -22,7 +25,7 @@ namespace DersEngine
 
 				// Create and compile the vertex shader
 				vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-				glShaderSource(vertexShaderID, 1, &vertexShaderCode, NULL);
+				glShaderSource(vertexShaderID, 1, &vsCode, NULL);
 				glCompileShader(vertexShaderID);
 
 				glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
@@ -35,7 +38,7 @@ namespace DersEngine
 
 				// Create and compile the fragment shader
 				fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-				glShaderSource(fragmentShaderID, 1, &fragmentShaderCode, NULL);
+				glShaderSource(fragmentShaderID, 1, &fsCode, NULL);
 				glCompileShader(fragmentShaderID);
 
 				glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);

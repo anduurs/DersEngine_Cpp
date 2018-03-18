@@ -5,7 +5,7 @@ layout (location = 0) out vec4 fragColor;
 in VS_Data
 {
 	vec4 worldPosition;
-	vec4 normal;
+	vec3 normal;
 	vec2 textureCoord;
 	vec3 cameraViewDirection;
 } fs_in;

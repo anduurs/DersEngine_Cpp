@@ -4,33 +4,47 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		Vector2f::Vector2f() : x(0.0f), y(0.0f) {}
-
-		Vector2f::Vector2f(float scalar) : x(scalar), y(scalar) {}
-
-		Vector2f::Vector2f(float x, float y) : x(x), y(y) {}
-
-		float Vector2f::Length() const
+		float Distance(const Vector2f& vector1, const Vector2f& vector2)
 		{
-			return sqrt(x * x + y * y);
+			float xDiff = vector1.x - vector2.x;
+			float yDiff = vector1.y - vector2.y;
+
+			return sqrt(xDiff * xDiff + yDiff * yDiff);
 		}
 
-		Vector2f Vector2f::Normalize() const
+		float Dot(const Vector2f& vector1, const Vector2f& vector2)
 		{
-			float length = Length();
-			return { x / length, y / length };
+			return vector1.x * vector2.x + vector1.y * vector2.y;
 		}
 
-		std::string Vector2f::ToString() const
+		Vector2f Lerp(const Vector2f& start, const Vector2f& target, float alpha)
+		{
+			return start + (target - start) * alpha;
+		}
+
+		float Length(const Vector2f& vector)
+		{
+			float vx = vector.x;
+			float vy = vector.y;
+			return sqrt(vx * vx + vy * vy);
+		}
+
+		Vector2f Normalize(const Vector2f& vector)
+		{
+			float length = Length(vector);
+			return { vector.x / length, vector.y / length };
+		}
+
+		std::string ToString(const Vector2f& vector)
 		{
 			std::stringstream result;
-			result << "Vector2f(" << x << ", " << y << ")";
+			result << "Vector2f(" << vector.x << ", " << vector.y << ")";
 			return result.str();
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const Vector2f& vector)
 		{
-			stream << vector.ToString();
+			stream << ToString(vector);
 			return stream;
 		}
 	}

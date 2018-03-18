@@ -1,54 +1,101 @@
 #include "MathLibrary\Vector3f.h"
+#include "MathLibrary\Quaternion.h"
 
 namespace DersEngine
 {
 	namespace Maths
 	{
-		Vector3f::Vector3f() : x(0.0f), y(0.0f), z(0.0) {}
-		Vector3f::Vector3f(float scalar) : x(scalar), y(scalar), z(scalar) {}
-		Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
-
-		Vector3f Vector3f::XAxis()
+		Vector3f XAxis()
 		{
 			return { -1.0f, 0.0f, 0.0f };
 		}
 
-		Vector3f Vector3f::YAxis()
+		Vector3f YAxis()
 		{
 			return {0.0f, 1.0f, 0.0f};
 		}
 
-		Vector3f Vector3f::ZAxis()
+		Vector3f ZAxis()
 		{
 			return { 0.0f, 0.0f, 1.0f };
 		}
 
-		Vector3f Vector3f::Zero()
+		Vector3f Zero()
 		{
 			return { 0.0f, 0.0f, 0.0f };
 		}
 
-		float Vector3f::Length() const
+		float Distance(const Vector3f& vector1, const Vector3f& vector2)
 		{
-			return sqrt(x * x + y * y + z * z);
+			float xDiff = vector1.x - vector2.x;
+			float yDiff = vector1.y - vector2.y;
+			float zDiff = vector1.z - vector2.z;
+
+			return sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 		}
 
-		Vector3f Vector3f::Normalize() const
+		float Dot(const Vector3f& vector1, const Vector3f& vector2)
 		{
-			float length = Length();
-			return { x / length, y / length , z / length };
+			return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 		}
 
-		std::string Vector3f::ToString() const
+		Vector3f Cross(const Vector3f& vector1, const Vector3f& vector2)
+		{
+			return
+			{
+				vector1.y * vector2.z - vector1.z * vector2.y,
+				vector1.z * vector2.x - vector1.x * vector2.z,
+				vector1.x * vector2.y - vector1.y * vector2.x
+			};
+		}
+
+		Vector3f Lerp(const Vector3f& start, const Vector3f& target, float alpha)
+		{
+			return start + (target - start) * alpha;
+		}
+
+		Vector3f Rotate(const Vector3f& vector, const Quaternion& rotation)
+		{
+			Quaternion quat = rotation * vector * Conjugate(rotation);
+			return { quat.x, quat.y, quat.z };
+		}
+
+		Vector3f GetAxis(const Quaternion& quat)
+		{
+			Vector3f v;
+
+			v.x = quat.x;
+			v.y = quat.y;
+			v.z = quat.z;
+
+			return Normalize(v);
+		}
+
+		float Length(const Vector3f& vector)
+		{
+			float vx = vector.x;
+			float vy = vector.y;
+			float vz = vector.z;
+
+			return sqrt(vx * vx + vy * vy + vz * vz);
+		}
+
+		Vector3f Normalize(const Vector3f& vector) 
+		{
+			float length = Length(vector);
+			return { vector.x / length, vector.y / length , vector.z / length };
+		}
+
+		std::string ToString(const Vector3f& vector) 
 		{
 			std::stringstream result;
-			result << "Vector3f(" << x << ", " << y << ", " << z << ")";
+			result << "Vector3f(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 			return result.str();
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const Vector3f& vector)
 		{
-			stream << vector.ToString();
+			stream << ToString(vector);
 			return stream;
 		}
 	}

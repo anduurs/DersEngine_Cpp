@@ -8,7 +8,6 @@ namespace DersEngine
 	{
 		enum TextureType
 		{
-			NONE,
 			DIFFUSE,
 			SPECULAR,
 			NORMAL,

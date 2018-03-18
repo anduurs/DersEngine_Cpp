@@ -6,6 +6,7 @@
 #include "Graphics\RenderEngine.h"
 #include "Graphics\Shader.h"
 #include "Platform\OpenGL\GLTextureLoader.h"
+#include "Memory\StackAllocator.h"
 
 #include<time.h>
 #include<iostream>
@@ -16,18 +17,26 @@ using namespace Debug;
 using namespace Utils;
 using namespace Graphics;
 
+class Entity
+{
+
+};
+
 
 int main()
 {	
-	Model model = LoadModel("Resources/Models/TestModel/test.obj", model);
+	
 
-	Shader* shader = new Shader("Resources/Shaders/PhongVertexShader.vert", "Resources/Shaders/PhongFragmentShader.frag");
+	
 
-	Material* mat = new Material(shader);
+	//Material* mat = new Material(shader);
 	
 	
 
 	Engine engine = { 800, 600, "DersEngine v0.01", true, false };
+
+	Shader* shader = new Shader("Resources/Shaders/PhongVertexShader.vert", "Resources/Shaders/PhongFragmentShader.frag");
+	Model model = LoadModel("Resources/Models/TestModel/test.fbx", model);
 	engine.Start();
 	return 0;
 }
