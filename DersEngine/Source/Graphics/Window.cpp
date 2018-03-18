@@ -1,4 +1,5 @@
 #include "Graphics/Window.h"
+#include "Debug\DebugLogging.h"
 
 namespace DersEngine
 {
@@ -7,8 +8,7 @@ namespace DersEngine
 		unsigned int Window::WIDTH = 0;
 		unsigned int Window::HEIGHT = 0;
 
-		Window::Window(unsigned int width, unsigned int height,
-			const char* title, bool vsync, bool fullScreen)
+		void Window::Init()
 		{
 			if (!glfwInit())
 			{
@@ -18,25 +18,18 @@ namespace DersEngine
 
 			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 			glfwWindowHint(GLFW_STENCIL_BITS, 4);
+		}
 
-			auto primaryMonitor = glfwGetPrimaryMonitor();
-			auto vidMode = glfwGetVideoMode(primaryMonitor);
+		void Window::CreateWindow(unsigned int width, unsigned int height, const char* title)
+		{
+			GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+			const GLFWvidmode* vidMode = glfwGetVideoMode(primaryMonitor);
 
-			if (fullScreen)
-			{
-				WIDTH = vidMode->width;
-				HEIGHT = vidMode->height;
+			WIDTH = width;
+			HEIGHT = height;
 
-				m_Window = glfwCreateWindow(WIDTH, HEIGHT, title, primaryMonitor, NULL);
-			}
-			else
-			{
-				WIDTH = width;
-				HEIGHT = height;
-
-				m_Window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
-				glfwSetWindowPos(m_Window, (vidMode->width - WIDTH) / 2, (vidMode->height - HEIGHT) / 2);
-			}
+			m_Window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
+			glfwSetWindowPos(m_Window, (vidMode->width - WIDTH) / 2, (vidMode->height - HEIGHT) / 2);
 
 			if (!m_Window)
 			{
@@ -44,7 +37,28 @@ namespace DersEngine
 				glfwTerminate();
 				return;
 			}
+		}
 
+		void Window::CreateFullScreenWindow()
+		{
+			GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+			const GLFWvidmode* vidMode  = glfwGetVideoMode(primaryMonitor);
+
+			WIDTH = vidMode->width;
+			HEIGHT = vidMode->height;
+
+			m_Window = glfwCreateWindow(WIDTH, HEIGHT, "", primaryMonitor, NULL);
+
+			if (!m_Window)
+			{
+				std::cout << "Failed to initialize window!" << std::endl;
+				glfwTerminate();
+				return;
+			}
+		}
+
+		void Window::CreateGLContext()
+		{
 			glfwMakeContextCurrent(m_Window);
 
 			if (glewInit() != GLEW_OK)
@@ -52,15 +66,17 @@ namespace DersEngine
 				std::cout << "Failed to initialize glew!" << std::endl;
 			}
 
-			vsync ? glfwSwapInterval(1) : glfwSwapInterval(0);
-
 			std::cout << glGetString(GL_VERSION) << std::endl;
 		}
 
-		Window::~Window()
+		void Window::SetupEventCallbacks()
 		{
-			std::cout << "Window destroyed!" << std::endl;
-			glfwTerminate();
+			glfwSetKeyCallback(m_Window, OnKeyEvent);
+		}
+
+		void Window::SetVSync(bool enabled)
+		{
+			enabled ? glfwSwapInterval(1) : glfwSwapInterval(0);
 		}
 
 		void Window::PollEvents()
@@ -68,18 +84,28 @@ namespace DersEngine
 			glfwPollEvents();
 		}
 
+		void Window::OnKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			if (key == GLFW_KEY_E && action == GLFW_PRESS)
+			{
+				Debug::Log("Key: ", GLFW_KEY_E, " pressed!");
+			}
+		}
+
 		void Window::SwapBuffers()
 		{
-			//TODO: Move this to render engine later
-			glClearColor(0, 0.2f, 0.3f, 0);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 			glfwSwapBuffers(m_Window);
 		}
 
 		bool Window::IsOpen()
 		{
 			return !glfwWindowShouldClose(m_Window);
+		}
+
+		void Window::Destroy()
+		{
+			std::cout << "Window destroyed!" << std::endl;
+			glfwTerminate();
 		}
 	}
 }

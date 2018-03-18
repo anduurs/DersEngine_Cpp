@@ -16,13 +16,17 @@ namespace DersEngine
 			static unsigned int WIDTH;
 			static unsigned int HEIGHT;
 
-			Window(unsigned int width, unsigned int height,
-				const char* title, bool vsync, bool fullScreen);
-			~Window();
-
+			void Init();
+			void CreateWindow(unsigned int width, unsigned int height, const char* title);
+			void CreateFullScreenWindow();
+			void CreateGLContext();
+			void SetupEventCallbacks();
+			void SetVSync(bool enabled);
 			void PollEvents();
+			static void OnKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods);
 			void SwapBuffers();
 			bool IsOpen();
+			void Destroy();
 		};
 	}
 }

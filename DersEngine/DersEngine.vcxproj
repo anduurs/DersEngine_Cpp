@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Core\Engine.h" />
+    <ClInclude Include="Include\Core\GameApplication.h" />
+    <ClInclude Include="Include\Core\MemoryAllocators\StackAllocator.h" />
+    <ClInclude Include="Include\Core\StackAllocator.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
     <ClInclude Include="Include\Graphics\Material.h" />
     <ClInclude Include="Include\Graphics\Mesh.h" />
@@ -30,6 +33,7 @@
     <ClInclude Include="Include\Graphics\Texture.h" />
     <ClInclude Include="Include\Graphics\Vertex.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
+    <ClInclude Include="Include\Input\InputManager.h" />
     <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
     <ClInclude Include="Include\MathLibrary\Matrix4f.h" />
@@ -46,12 +50,13 @@
     <ClInclude Include="Include\Utils\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Core\GameApplication.cpp" />
+    <ClCompile Include="Source\Core\MemoryAllocators\StackAllocator.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Graphics\RenderEngine.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\ShaderFactory.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\MathLibrary\MathLibrary.cpp" />
     <ClCompile Include="Source\MathLibrary\Matrix4f.cpp" />

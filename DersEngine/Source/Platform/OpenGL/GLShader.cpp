@@ -73,16 +73,6 @@ namespace DersEngine
 				return shaderProgramID;
 			}
 
-			void Bind(unsigned int shaderProgram)
-			{
-				glUseProgram(shaderProgram);
-			}
-
-			void UnBind()
-			{
-				glUseProgram(0);
-			}
-
 			unsigned int AddUniform(unsigned int shaderProgram, const std::string& uniformName)
 			{
 				return glGetUniformLocation(shaderProgram, uniformName.c_str());
@@ -116,6 +106,16 @@ namespace DersEngine
 			void LoadMatrix4f(unsigned int uniformLocation, const Matrix4f& mat)
 			{
 				glUniformMatrix4fv(uniformLocation, 1, GL_TRUE,  mat.data);
+			}
+
+			void Bind(unsigned int shaderProgram)
+			{
+				glUseProgram(shaderProgram);
+			}
+
+			void UnBind()
+			{
+				glUseProgram(0);
 			}
 
 			void DeleteShader(unsigned int shaderProgram)
