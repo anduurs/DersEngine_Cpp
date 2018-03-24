@@ -4,7 +4,7 @@ namespace DersEngine
 {
 	namespace MemoryManagement
 	{
-		void StackAllocator::Reserve(u32 totalSize)
+		void StackAllocator::Reserve(u64 totalSize)
 		{
 			if (!m_StartingBlockPtr)
 			{
@@ -13,28 +13,48 @@ namespace DersEngine
 
 			m_TotalSize = totalSize;
 			m_StartingBlockPtr = malloc(totalSize);
-			m_CurrentBlockPtr = m_StartingBlockPtr;
-			m_BlockCounter = 0;
+			m_Offset = 0;
 		}
 
-		void* StackAllocator::Allocate(u32 size, u32 alignment)
+		void* StackAllocator::Allocate(u64 size, u64 alignment)
 		{
-			//void* newTop = AlignData(m_CurrentBlockPtr + m_BlockCounter, alignment);
-			
+			u64 currentAddress = (u64)m_StartingBlockPtr + m_Offset;
+			u64 padding = MemoryUtil::CalculatePaddingWithHeader(currentAddress, alignment, sizeof(Header));
 
-			m_BlockCounter++;
-			return nullptr;
+			if (m_Offset + padding + size > m_TotalSize)
+			{
+				return nullptr;
+			}
+
+			m_Offset += padding;
+
+			u64 nextAddress = currentAddress + padding;
+			u64 headerAddress = nextAddress - sizeof(Header);
+
+			Header header;
+			header.offset = padding;
+			Header* headerPtr = (Header*)headerAddress;
+			headerPtr = &header;
+
+			m_Offset += size;
+
+			return (void*)nextAddress;
 		}
 
-		void StackAllocator::Free(void* data)
+		void StackAllocator::Free(void* blockPtr)
 		{
-			m_BlockCounter--;
+			u64 currentAddress = (u64)blockPtr;
+			u64 headerAddress = currentAddress - sizeof(Header);
+			Header* header = (Header*)headerAddress;
+
+			m_Offset = currentAddress - header->offset - (u64)m_StartingBlockPtr;
 		}
 
-		void StackAllocator::Destroy()
+		void StackAllocator::Clear()
 		{
 			free(m_StartingBlockPtr);
 			m_StartingBlockPtr = nullptr;
+			m_Offset = 0;
 		}
 	}
 }

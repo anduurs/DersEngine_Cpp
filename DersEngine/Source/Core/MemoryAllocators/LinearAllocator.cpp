@@ -8,7 +8,6 @@ namespace DersEngine
 		void LinearAllocator::Reserve(u64 totalSize)
 		{
 			m_StartingBlockPtr = malloc(totalSize);
-			m_CurrentBlockPtr = m_StartingBlockPtr;
 			m_TotalSize = totalSize;
 			m_Offset = 0;
 		}
@@ -28,16 +27,14 @@ namespace DersEngine
 				return nullptr;
 			}
 
-			m_Offset += padding;
 			u64 nextAddress = currentAddress + size;
+			m_Offset += padding;
 			m_Offset += size;
 
-			std::cout << "A" << "\t@C " << (void*)currentAddress << "\t@R " << (void*)nextAddress << "\tO " << m_Offset << "\tP " << padding << std::endl;
-			
 			return (void*)nextAddress;
 		}
 
-		void LinearAllocator::Free()
+		void LinearAllocator::Clear()
 		{
 			free(m_StartingBlockPtr);
 			m_StartingBlockPtr = nullptr;

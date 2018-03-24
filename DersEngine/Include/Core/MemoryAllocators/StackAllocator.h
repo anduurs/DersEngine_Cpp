@@ -23,32 +23,32 @@ namespace DersEngine
 		{
 		private:
 			void* m_StartingBlockPtr;
-			void* m_CurrentBlockPtr;
-			u32 m_BlockCounter;
-			u32 m_TotalSize;
+		
+			u64 m_Offset;
+			u64 m_TotalSize;
 
 			struct Header
 			{
-				u32 blockSize;
+				u64 offset;
 			};
 
 		public:
 			/* Reserves memory on the heap of the size given in bytes */
-			void Reserve(u32 totalSize);
+			void Reserve(u64 totalSize);
 
 			/* Allocates a chunk of memory within this allocator of the size given in bytes. 
-			   There is also an option for having the data aligned
-			   @param u32 size the amount of memory in bytes you wish to allocate
-			   @param u32 alignment the memory alignment you wish to have for the data. This must be in the power of two (e.g 4byte, 16byte, 32byte alignment). 
+			   There is also an option for having the data aligned to a specified byte boundary.
+			   @param u64 size the amount of memory in bytes you wish to allocate
+			   @param u64 alignment the memory alignment you wish to have for the data. This must be in the power of two (e.g 4byte, 16byte, 32byte alignment). 
 			   Default alignment is set to zero.
 			*/
-			void* Allocate(u32 size, u32 alignment = 0);
+			void* Allocate(u64 size, u64 alignment = 0);
 
 			/* Frees the memory that the given data occupies in this allocator */
-			void Free(void* data);
+			void Free(void* blockPtr);
 
-			/* Resets this allocator by freeing all occupied memory */
-			void Destroy();
+			/* Clears this allocator by freeing all occupied memory */
+			void Clear();
 			
 		};
 	}
