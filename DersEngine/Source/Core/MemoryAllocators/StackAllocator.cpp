@@ -2,41 +2,39 @@
 
 namespace DersEngine
 {
-	namespace Memory
+	namespace MemoryManagement
 	{
-		void StackAllocator::Init(size_t totalSize)
+		void StackAllocator::Reserve(u32 totalSize)
 		{
-			if (!m_Data)
+			if (!m_StartingBlockPtr)
 			{
-				free(m_Data);
+				free(m_StartingBlockPtr);
 			}
 
 			m_TotalSize = totalSize;
-			m_Data = malloc(totalSize);
-			m_StackPtrOffset = 0;
+			m_StartingBlockPtr = malloc(totalSize);
+			m_CurrentBlockPtr = m_StartingBlockPtr;
+			m_BlockCounter = 0;
 		}
 
-		void* StackAllocator::Allocate(size_t size)
+		void* StackAllocator::Allocate(u32 size, u32 alignment)
 		{
-			if (m_StackPtrOffset >= m_TotalSize)
-			{
-				return nullptr;
-			}
+			//void* newTop = AlignData(m_CurrentBlockPtr + m_BlockCounter, alignment);
+			
 
-			m_StackPtrOffset++;
+			m_BlockCounter++;
 			return nullptr;
-			//return (void*)&m_Data[m_StackPtrOffset - 1];
 		}
 
-		void StackAllocator::Free()
+		void StackAllocator::Free(void* data)
 		{
-			m_StackPtrOffset--;
+			m_BlockCounter--;
 		}
 
 		void StackAllocator::Destroy()
 		{
-			free(m_Data);
-			m_Data = nullptr;
+			free(m_StartingBlockPtr);
+			m_StartingBlockPtr = nullptr;
 		}
 	}
 }

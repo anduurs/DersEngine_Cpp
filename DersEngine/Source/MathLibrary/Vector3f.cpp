@@ -25,16 +25,16 @@ namespace DersEngine
 			return { 0.0f, 0.0f, 0.0f };
 		}
 
-		float Distance(const Vector3f& vector1, const Vector3f& vector2)
+		f32 Distance(const Vector3f& vector1, const Vector3f& vector2)
 		{
-			float xDiff = vector1.x - vector2.x;
-			float yDiff = vector1.y - vector2.y;
-			float zDiff = vector1.z - vector2.z;
+			f32 xDiff = vector1.x - vector2.x;
+			f32 yDiff = vector1.y - vector2.y;
+			f32 zDiff = vector1.z - vector2.z;
 
 			return sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 		}
 
-		float Dot(const Vector3f& vector1, const Vector3f& vector2)
+		f32 Dot(const Vector3f& vector1, const Vector3f& vector2)
 		{
 			return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 		}
@@ -71,18 +71,18 @@ namespace DersEngine
 			return Normalize(v);
 		}
 
-		float Length(const Vector3f& vector)
+		f32 Length(const Vector3f& vector)
 		{
-			float vx = vector.x;
-			float vy = vector.y;
-			float vz = vector.z;
+			f32 vx = vector.x;
+			f32 vy = vector.y;
+			f32 vz = vector.z;
 
 			return sqrt(vx * vx + vy * vy + vz * vz);
 		}
 
 		Vector3f Normalize(const Vector3f& vector) 
 		{
-			float length = Length(vector);
+			f32 length = Length(vector);
 			return { vector.x / length, vector.y / length , vector.z / length };
 		}
 

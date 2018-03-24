@@ -21,8 +21,11 @@
   <ItemGroup>
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Core\GameApplication.h" />
+    <ClInclude Include="Include\Core\MemoryAllocators\LinearAllocator.h" />
+    <ClInclude Include="Include\Core\MemoryAllocators\MemoryUtil.h" />
     <ClInclude Include="Include\Core\MemoryAllocators\StackAllocator.h" />
     <ClInclude Include="Include\Core\StackAllocator.h" />
+    <ClInclude Include="Include\Core\Types.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
     <ClInclude Include="Include\Graphics\Material.h" />
     <ClInclude Include="Include\Graphics\Mesh.h" />
@@ -51,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\GameApplication.cpp" />
+    <ClCompile Include="Source\Core\MemoryAllocators\LinearAllocator.cpp" />
     <ClCompile Include="Source\Core\MemoryAllocators\StackAllocator.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Graphics\RenderEngine.cpp" />

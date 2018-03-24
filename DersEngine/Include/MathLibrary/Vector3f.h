@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 
+#include "Core\Types.h"
+
 namespace DersEngine
 {
 	namespace Maths
@@ -11,9 +13,9 @@ namespace DersEngine
 
 		struct Vector3f
 		{
-			float x;
-			float y;
-			float z;
+			f32 x;
+			f32 y;
+			f32 z;
 		};
 
 		Vector3f XAxis();
@@ -21,9 +23,9 @@ namespace DersEngine
 		Vector3f ZAxis();
 		Vector3f Zero();
 
-		float Distance(const Vector3f& vector1, const Vector3f& vector2);
+		f32 Distance(const Vector3f& vector1, const Vector3f& vector2);
 
-		float Dot(const Vector3f& vector1, const Vector3f& vector2);
+		f32 Dot(const Vector3f& vector1, const Vector3f& vector2);
 
 		Vector3f Cross(const Vector3f& vector1, const Vector3f& vector2);
 
@@ -33,7 +35,7 @@ namespace DersEngine
 
 		Vector3f GetAxis(const Quaternion& quat);
 
-		float Length(const Vector3f& vector);
+		f32 Length(const Vector3f& vector);
 
 		Vector3f Normalize(const Vector3f& vector);
 
