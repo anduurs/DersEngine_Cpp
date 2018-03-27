@@ -8,6 +8,7 @@
 #include "Graphics\Shader.h"
 #include "Platform\OpenGL\GLTextureLoader.h"
 #include "Core/Memory/LinearAllocator.h"
+#include "Core\Memory\StackAllocator.h"
 
 #include<time.h>
 #include<iostream>
@@ -48,6 +49,8 @@ int main()
 	Entity* e3 = (Entity*)allocator.Allocate(sizeof(Entity), 4);
 	Entity* e4 = (Entity*)allocator.Allocate(sizeof(Entity), 4);
 	
+
+	//Model
 
 	//Material* mat = new Material(shader);
 	GameApplication game = { 800, 600, "DersEngine v0.01", true, false };

@@ -18,7 +18,7 @@ namespace DersEngine
 		using namespace Graphics;
 		using namespace Platform;
 
-		Model LoadModel(const std::string& path, Model& model);
+		Model LoadModel(const std::string& path);
 
 		void ProcessNode(aiNode* node, const aiScene* scene, Model& model);
 

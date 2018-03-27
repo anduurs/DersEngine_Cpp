@@ -6,7 +6,7 @@ namespace DersEngine
 {
 	namespace Utils
 	{
-		Model LoadModel(const std::string& path, Model& model)
+		Model LoadModel(const std::string& path)
 		{
 			// Imports a model and stores it into a assimp scene structure
 			Assimp::Importer importer;
@@ -20,6 +20,8 @@ namespace DersEngine
 				Debug::Log("ERROR::ASSIMP::", importer.GetErrorString());
 				return {};
 			}
+
+			Model model;
 
 			model.directory = path.substr(0, path.find_last_of('/'));
 		
