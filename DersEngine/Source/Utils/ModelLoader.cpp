@@ -1,7 +1,5 @@
 #include "Utils\ModelLoader.h"
 #include "Debug\DebugLogging.h"
-#include "Platform\OpenGL\GLTextureLoader.h"
-#include "Platform\OpenGL\GLRenderer.h"
 #include "Graphics\Vertex.h"
 
 namespace DersEngine
@@ -32,13 +30,13 @@ namespace DersEngine
 
 		void ProcessNode(aiNode* node, const aiScene* scene, Model& model)
 		{
-			for (unsigned int i = 0; i < node->mNumMeshes; i++)
+			for (u32 i = 0; i < node->mNumMeshes; i++)
 			{
 				aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 				model.meshes.emplace_back(ProcessMesh(mesh, scene, model));
 			}
 
-			for (unsigned int i = 0; i < node->mNumChildren; i++)
+			for (u32 i = 0; i < node->mNumChildren; i++)
 			{
 				ProcessNode(node->mChildren[i], scene, model);
 			}
@@ -49,11 +47,11 @@ namespace DersEngine
 			Mesh resultMesh;
 
 			std::vector<Vertex> vertices;
-			std::vector<unsigned int> indices;
+			std::vector<u32> indices;
 
-			unsigned int numOfVertices = mesh->mNumVertices;
+			u32 numOfVertices = mesh->mNumVertices;
 
-			for (unsigned int i = 0; i < numOfVertices; i++)
+			for (u32 i = 0; i < numOfVertices; i++)
 			{
 				Vertex vertex;
 
@@ -79,11 +77,11 @@ namespace DersEngine
 				vertices.emplace_back(vertex);
 			}
 
-			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+			for (u32 i = 0; i < mesh->mNumFaces; i++)
 			{
 				aiFace face = mesh->mFaces[i];
 
-				for (unsigned int j = 0; j < face.mNumIndices; j++)
+				for (u32 j = 0; j < face.mNumIndices; j++)
 				{
 					indices.emplace_back(face.mIndices[i]);
 				}
@@ -91,7 +89,7 @@ namespace DersEngine
 
 			if (mesh->mMaterialIndex >= 0)
 			{
-				unsigned int materialIndex = mesh->mMaterialIndex;
+				u32 materialIndex = mesh->mMaterialIndex;
 				aiMaterial* material = scene->mMaterials[materialIndex];
 				//Material* mat = resultMesh.material;
 
@@ -111,8 +109,8 @@ namespace DersEngine
 				//meshMaterial->textures.insert(meshMaterial->textures.end(), normalMaps.begin(), normalMaps.end());
 			}
 
-			resultMesh.numOfIndices = indices.size();
-			resultMesh.id = OpenGL_API::UploadMeshData(vertices, indices);
+			resultMesh.indices = indices.size();
+			resultMesh.id = OpenGL::UploadMeshData(vertices, indices);
 
 			return resultMesh;
 		}
@@ -122,14 +120,14 @@ namespace DersEngine
 		{
 			std::vector<Texture> textures;
 
-			for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
+			for (u32 i = 0; i < material->GetTextureCount(type); i++)
 			{
 				aiString textureFilePath;
 				material->GetTexture(type, i, &textureFilePath);
 
 				bool skip = false;
 
-				for (unsigned int j = 0; j < model.loadedTextures.size(); j++)
+				for (u32 j = 0; j < model.loadedTextures.size(); j++)
 				{
 					if (std::strcmp(model.loadedTextures[j].path.data(), textureFilePath.C_Str()) == 0)
 					{
@@ -142,8 +140,9 @@ namespace DersEngine
 				if (!skip)
 				{
 					Texture texture;
-					texture.id = OpenGL_API::LoadTextureFromFile(textureFilePath.C_Str(), model.directory);
+					texture.id = OpenGL::LoadTextureFromFile(textureFilePath.C_Str(), model.directory);
 					texture.type = textureType;
+					texture.textureSlot = i;
 					texture.path = textureFilePath.C_Str();
 					textures.emplace_back(texture);
 					model.loadedTextures.emplace_back(texture);

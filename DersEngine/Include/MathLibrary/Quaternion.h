@@ -8,9 +8,9 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		struct Matrix4f;
+		struct Mat4f;
 
-		struct Quaternion
+		struct Quat
 		{
 			float x;
 			float y;
@@ -18,41 +18,41 @@ namespace DersEngine
 			float w;
 		};
 
-		Quaternion CreateQuaternionFromAxisAndAngle(const Vector3f& axis, float angle);
+		Quat CreateQuaternionFromAxisAndAngle(const Vec3f& axis, f32 angle);
 
-		float Dot(const Quaternion& quat1, const Quaternion& quat2);
+		f32 Dot(const Quat& quat1, const Quat& quat2);
 
-		Quaternion LookAt(const Vector3f& start, const Vector3f& target);
+		Quat LookAt(const Vec3f& start, const Vec3f& target);
 
-		Quaternion Slerp(const Quaternion& quat1, Quaternion quat2, float alpha);
+		Quat Slerp(const Quat& quat1, Quat quat2, f32 alpha);
 
 		//Quaternion FromEuler(float roll, float pitch, float yaw);
 
 		//Vector3f ToEuler(const Quaternion& q);
 
-		Matrix4f ToRotationMatrix(const Quaternion& quat);
+		Mat4f ToRotationMatrix(const Quat& quat);
 
-		float Length(const Quaternion& quat);
+		f32 Length(const Quat& quat);
 
-		Quaternion Normalize(const Quaternion& quat);
+		Quat Normalize(const Quat& quat);
 
-		Quaternion Conjugate(const Quaternion& quat);
+		Quat Conjugate(const Quat& quat);
 
-		Quaternion Identity();
+		Quat Identity();
 
-		Vector3f GetForward(const Quaternion& quat);
+		Vec3f GetForward(const Quat& quat);
 
-		Vector3f GetUp(const Quaternion& quat);
+		Vec3f GetUp(const Quat& quat);
 
-		Vector3f GetRight(const Quaternion& quat);
+		Vec3f GetRight(const Quat& quat);
 
-		Vector3f GetXYZ(const Quaternion& quat);
+		Vec3f GetXYZ(const Quat& quat);
 
-		std::string ToString(const Quaternion& quat);
+		std::string ToString(const Quat& quat);
 
-		std::ostream& operator<<(std::ostream& stream, const Quaternion& quat);
+		std::ostream& operator<<(std::ostream& stream, const Quat& quat);
 
-		inline Quaternion operator*(const Quaternion& left, const Quaternion& right)
+		inline Quat operator*(const Quat& left, const Quat& right)
 		{
 			return 
 			{ 
@@ -63,7 +63,7 @@ namespace DersEngine
 			};
 		}
 
-		inline Quaternion operator*(const Quaternion& left, const Vector3f& right)
+		inline Quat operator*(const Quat& left, const Vec3f& right)
 		{
 			return 
 			{
@@ -74,7 +74,7 @@ namespace DersEngine
 			};
 		}
 
-		inline Quaternion operator+(const Quaternion& left, const Quaternion& right)
+		inline Quat operator+(const Quat& left, const Quat& right)
 		{
 			return 
 			{ 
@@ -85,7 +85,7 @@ namespace DersEngine
 			};
 		}
 
-		inline Quaternion operator-(const Quaternion& left, const Quaternion& right)
+		inline Quat operator-(const Quat& left, const Quat& right)
 		{
 			return 
 			{ 
@@ -96,12 +96,12 @@ namespace DersEngine
 			};
 		}
 
-		inline bool operator==(const Quaternion& left, const Quaternion& right)
+		inline bool operator==(const Quat& left, const Quat& right)
 		{
 			return left.x == right.x && left.y == right.y && left.z == right.z && left.w == right.w;
 		}
 
-		inline bool operator!=(const Quaternion& left, const Quaternion& right)
+		inline bool operator!=(const Quat& left, const Quat& right)
 		{
 			return !(left == right);
 		}

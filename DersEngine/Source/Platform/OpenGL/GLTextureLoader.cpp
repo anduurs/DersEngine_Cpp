@@ -4,11 +4,11 @@
 
 namespace DersEngine
 {
-	namespace Graphics
+	namespace Platform
 	{
-		namespace OpenGL_API
+		namespace OpenGL
 		{
-			unsigned int LoadTexture(const std::string& path)
+			u32 LoadTexture(const std::string& path)
 			{
 				TextureParameters params;
 
@@ -20,19 +20,19 @@ namespace DersEngine
 				return LoadTexture(path, params);
 			}
 
-			unsigned int LoadTextureFromFile(const std::string& path, const std::string& directory)
+			u32 LoadTextureFromFile(const std::string& path, const std::string& directory)
 			{
 				std::string fileName = directory + '/' + path;
 				return LoadTexture(fileName);
 			}
 
-			unsigned int LoadTexture(const std::string& path, const TextureParameters& params)
+			u32 LoadTexture(const std::string& path, const TextureParameters& params)
 			{
-				int width;
-				int height;
-				int nrChannels;
+				s32 width;
+				s32 height;
+				s32 nrChannels;
 
-				unsigned int textureID;
+				u32 textureID;
 				unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 
 				if (data)

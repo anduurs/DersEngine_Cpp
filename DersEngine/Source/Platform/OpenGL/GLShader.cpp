@@ -4,11 +4,11 @@
 
 namespace DersEngine
 {
-	namespace Graphics
+	namespace Platform
 	{
-		namespace OpenGL_API
+		namespace OpenGL
 		{
-			unsigned int CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+			u32 CreateShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 			{
 				std::string vertexShaderCode   = Utils::ReadFile(vertexShaderPath);
 				std::string fragmentShaderCode = Utils::ReadFile(fragmentShaderPath);
@@ -16,11 +16,11 @@ namespace DersEngine
 				const char* vsCode = vertexShaderCode.c_str();
 				const char* fsCode = fragmentShaderCode.c_str();
 		
-				unsigned int shaderProgramID;
-				unsigned int vertexShaderID;
-				unsigned int fragmentShaderID;
+				u32 shaderProgramID;
+				u32 vertexShaderID;
+				u32 fragmentShaderID;
 
-				int success;
+				s32 success;
 				char infoLog[512];
 
 				// Create and compile the vertex shader
@@ -73,52 +73,52 @@ namespace DersEngine
 				return shaderProgramID;
 			}
 
-			unsigned int AddUniform(unsigned int shaderProgram, const std::string& uniformName)
+			u32 AddUniform(u32 shaderProgram, const std::string& uniformName)
 			{
 				return glGetUniformLocation(shaderProgram, uniformName.c_str());
 			}
 
-			void LoadFloat(unsigned int uniformLocation, float value)
+			void LoadFloat(u32 uniformLocation, f32 value)
 			{
 				glUniform1f(uniformLocation, value);
 			}
 
-			void LoadInteger(unsigned int uniformLocation, int value)
+			void LoadInteger(u32 uniformLocation, s32 value)
 			{
 				glUniform1i(uniformLocation, value);
 			}
 
-			void LoadBool(unsigned int uniformLocation, bool value)
+			void LoadBool(u32 uniformLocation, bool value)
 			{
 				glUniform1i(uniformLocation, value ? 1 : 0);
 			}
 
-			void LoadVector2f(unsigned int uniformLocation, const Vector2f& vector)
+			void LoadVector2f(u32 uniformLocation, const Vec2f& vector)
 			{
 				glUniform2f(uniformLocation, vector.x, vector.y);
 			}
 
-			void LoadVector3f(unsigned int uniformLocation, const Vector3f& vector)
+			void LoadVector3f(u32 uniformLocation, const Vec3f& vector)
 			{
 				glUniform3f(uniformLocation, vector.x, vector.y, vector.z);
 			}
 
-			void LoadMatrix4f(unsigned int uniformLocation, const Matrix4f& mat)
+			void LoadMatrix4f(u32 uniformLocation, const Mat4f& mat)
 			{
 				glUniformMatrix4fv(uniformLocation, 1, GL_TRUE,  mat.data);
 			}
 
-			void Bind(unsigned int shaderProgram)
+			void BindShader(u32 shaderProgram)
 			{
 				glUseProgram(shaderProgram);
 			}
 
-			void UnBind()
+			void UnBindShader()
 			{
 				glUseProgram(0);
 			}
 
-			void DeleteShader(unsigned int shaderProgram)
+			void DeleteShader(u32 shaderProgram)
 			{
 				glDeleteProgram(shaderProgram);
 			}

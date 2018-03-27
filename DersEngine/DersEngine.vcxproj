@@ -21,9 +21,9 @@
   <ItemGroup>
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Core\GameApplication.h" />
-    <ClInclude Include="Include\Core\MemoryAllocators\LinearAllocator.h" />
-    <ClInclude Include="Include\Core\MemoryAllocators\MemoryUtil.h" />
-    <ClInclude Include="Include\Core\MemoryAllocators\StackAllocator.h" />
+    <ClInclude Include="Include\Core\Memory\LinearAllocator.h" />
+    <ClInclude Include="Include\Core\Memory\MemoryUtil.h" />
+    <ClInclude Include="Include\Core\Memory\StackAllocator.h" />
     <ClInclude Include="Include\Core\StackAllocator.h" />
     <ClInclude Include="Include\Core\Types.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
@@ -32,20 +32,20 @@
     <ClInclude Include="Include\Graphics\Model.h" />
     <ClInclude Include="Include\Graphics\RenderEngine.h" />
     <ClInclude Include="Include\Graphics\Shader.h" />
-    <ClInclude Include="Include\Graphics\ShaderFactory.h" />
     <ClInclude Include="Include\Graphics\Texture.h" />
     <ClInclude Include="Include\Graphics\Vertex.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
     <ClInclude Include="Include\Input\InputManager.h" />
-    <ClInclude Include="Include\MathLibrary\MathLibrary.h" />
+    <ClInclude Include="Include\MathLibrary\MathUtil.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
     <ClInclude Include="Include\MathLibrary\Matrix4f.h" />
     <ClInclude Include="Include\MathLibrary\Quaternion.h" />
     <ClInclude Include="Include\MathLibrary\Transform.h" />
     <ClInclude Include="Include\MathLibrary\Vector2f.h" />
     <ClInclude Include="Include\MathLibrary\Vector3f.h" />
+    <ClInclude Include="Include\MathLibrary\Vector4f.h" />
     <ClInclude Include="Include\Memory\StackAllocator.h" />
-    <ClInclude Include="Include\Platform\OpenGL\GLRenderer.h" />
+    <ClInclude Include="Include\Platform\OpenGL\GLRenderingUtil.h" />
     <ClInclude Include="Include\Platform\OpenGL\GLShader.h" />
     <ClInclude Include="Include\Platform\OpenGL\GLTextureLoader.h" />
     <ClInclude Include="Include\Utils\FileManager.h" />
@@ -54,21 +54,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\GameApplication.cpp" />
-    <ClCompile Include="Source\Core\MemoryAllocators\LinearAllocator.cpp" />
-    <ClCompile Include="Source\Core\MemoryAllocators\StackAllocator.cpp" />
+    <ClCompile Include="Source\Core\Memory\LinearAllocator.cpp" />
+    <ClCompile Include="Source\Core\Memory\StackAllocator.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Graphics\RenderEngine.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
-    <ClCompile Include="Source\Graphics\ShaderFactory.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
-    <ClCompile Include="Source\MathLibrary\MathLibrary.cpp" />
+    <ClCompile Include="Source\MathLibrary\MathUtil.cpp" />
     <ClCompile Include="Source\MathLibrary\Matrix4f.cpp" />
     <ClCompile Include="Source\MathLibrary\Quaternion.cpp" />
     <ClCompile Include="Source\MathLibrary\Transform.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector2f.cpp" />
     <ClCompile Include="Source\MathLibrary\Vector3f.cpp" />
-    <ClCompile Include="Source\Platform\OpenGL\GLRenderer.cpp" />
+    <ClCompile Include="Source\Platform\OpenGL\GLRenderingUtil.cpp" />
     <ClCompile Include="Source\Platform\OpenGL\GLShader.cpp" />
     <ClCompile Include="Source\Platform\OpenGL\GLTextureLoader.cpp" />
     <ClCompile Include="Source\Utils\FileManager.cpp" />

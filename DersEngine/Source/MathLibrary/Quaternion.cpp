@@ -1,19 +1,19 @@
 #include "MathLibrary\Quaternion.h"
-#include "MathLibrary\MathLibrary.h"
+#include "MathLibrary\MathUtil.h"
 #include "MathLibrary\Matrix4f.h"
 
 namespace DersEngine
 {
 	namespace Maths
 	{
-		Quaternion CreateQuaternionFromAxisAndAngle(const Vector3f& axis, float angle)
+		Quat CreateQuaternionFromAxisAndAngle(const Vec3f& axis, f32 angle)
 		{
-			Quaternion quat;
+			Quat quat;
 
-			float halfAngleInRadians = ToRadians(angle) / 2.0f;
+			f32 halfAngleInRadians = ToRadians(angle) / 2.0f;
 
-			float sinHalfAngle = Sin(halfAngleInRadians);
-			float cosHalfAngle = Cos(halfAngleInRadians);
+			f32 sinHalfAngle = Sin(halfAngleInRadians);
+			f32 cosHalfAngle = Cos(halfAngleInRadians);
 
 			quat.x = axis.x * sinHalfAngle;
 			quat.y = axis.y * sinHalfAngle;
@@ -24,16 +24,16 @@ namespace DersEngine
 			return quat;
 		}
 
-		float Dot(const Quaternion& quat1, const Quaternion& quat2)
+		f32 Dot(const Quat& quat1, const Quat& quat2)
 		{
 			return quat1.x * quat2.x + quat1.y * quat2.y + quat1.z * quat2.z + quat1.w * quat2.w;
 		}
 
-		Quaternion LookAt(const Vector3f& start, const Vector3f& target)
+		Quat LookAt(const Vec3f& start, const Vec3f& target)
 		{
-			Vector3f directionToTarget = Normalize(target - start);
+			Vec3f directionToTarget = Normalize(target - start);
 
-			float dot = Dot(ZAxis(), directionToTarget);
+			f32 dot = Dot(ZAxis(), directionToTarget);
 
 			if (abs(dot + 1.0f) < 0.000001f)
 			{
@@ -45,15 +45,15 @@ namespace DersEngine
 				return Identity();
 			}
 
-			float angle = acosf(dot);
-			Vector3f rotationAxis = Cross(ZAxis(), Normalize(directionToTarget));
+			f32 angle = acosf(dot);
+			Vec3f rotationAxis = Cross(ZAxis(), Normalize(directionToTarget));
 
 			return CreateQuaternionFromAxisAndAngle(rotationAxis, ToDegrees(angle));
 		}
 
-		Quaternion Slerp(const Quaternion& quat1, Quaternion quat2, float alpha)
+		Quat Slerp(const Quat& quat1, Quat quat2, f32 alpha)
 		{
-			float flCosOmega = quat1.w * quat2.w + Dot(GetXYZ(quat2), GetXYZ(quat1));
+			f32 flCosOmega = quat1.w * quat2.w + Dot(GetXYZ(quat2), GetXYZ(quat1));
 
 			if (flCosOmega < 0)
 			{
@@ -65,7 +65,7 @@ namespace DersEngine
 				flCosOmega = -flCosOmega;
 			}
 
-			float k0, k1;
+			f32 k0, k1;
 
 			if (flCosOmega > 0.9999f)
 			{
@@ -74,15 +74,15 @@ namespace DersEngine
 			}
 			else
 			{
-				float flSinOmega = sqrt(1 - flCosOmega * flCosOmega);
-				float flOmega = atan2(flSinOmega, flCosOmega);
-				float flOneOverSinOmega = 1 / flSinOmega;
+				f32 flSinOmega = sqrt(1 - flCosOmega * flCosOmega);
+				f32 flOmega = atan2(flSinOmega, flCosOmega);
+				f32 flOneOverSinOmega = 1 / flSinOmega;
 
 				k0 = sin((1 - alpha) * flOmega) * flOneOverSinOmega;
 				k1 = sin(alpha * flOmega) * flOneOverSinOmega;
 			}
 
-			Quaternion result;
+			Quat result;
 
 			result.w = quat1.w * k0 + quat2.w * k1;
 			result.x = quat1.x * k0 + quat2.x * k1;
@@ -92,23 +92,23 @@ namespace DersEngine
 			return result;
 		}
 
-		Matrix4f ToRotationMatrix(const Quaternion& quat)
+		Mat4f ToRotationMatrix(const Quat& quat)
 		{
-			Vector3f forward =
+			Vec3f forward =
 			{
 				2.0f * (quat.x * quat.z - quat.w * quat.y),
 				2.0f * (quat.y * quat.z + quat.w * quat.x),
 				1.0f - 2.0f * (quat.x * quat.x + quat.y * quat.y)
 			};
 
-			Vector3f up =
+			Vec3f up =
 			{
 				2.0f * (quat.x * quat.y + quat.w * quat.z),
 				1.0f - 2.0f * (quat.x * quat.x + quat.z * quat.z),
 				2.0f * (quat.y * quat.z - quat.w * quat.x)
 			};
 
-			Vector3f right =
+			Vec3f right =
 			{
 				1.0f - 2.0f * (quat.y * quat.y + quat.z * quat.z),
 				2.0f * (quat.x * quat.y - quat.w * quat.z),
@@ -116,62 +116,62 @@ namespace DersEngine
 			};
 
 
-			return Basis(Matrix4f(), forward, up, right);
+			return Basis(Mat4f(), forward, up, right);
 		}
 
-		float Length(const Quaternion& quat)
+		f32 Length(const Quat& quat)
 		{
-			float qx = quat.x;
-			float qy = quat.y;
-			float qz = quat.z;
-			float qw = quat.w;
+			f32 qx = quat.x;
+			f32 qy = quat.y;
+			f32 qz = quat.z;
+			f32 qw = quat.w;
 			return sqrt(qx * qx + qy * qy + qz * qz + qw * qw);
 		}
 
-		Quaternion Normalize(const Quaternion& quat)
+		Quat Normalize(const Quat& quat)
 		{
-			float length = Length(quat);
+			f32 length = Length(quat);
 			return { quat.x / length, quat.y / length, quat.z / length, quat.w / length };
 		}
 
-		Quaternion Conjugate(const Quaternion& quat)
+		Quat Conjugate(const Quat& quat)
 		{
 			return { -quat.x, -quat.y, -quat.z, quat.w };
 		}
 
-		Quaternion Identity()
+		Quat Identity()
 		{
 			return { 0.0f, 0.0f, 0.0f, 1.0f };
 		}
 
-		Vector3f GetForward(const Quaternion& quat)
+		Vec3f GetForward(const Quat& quat)
 		{
 			return Normalize(Rotate({ 0, 0, 1 }, quat));
 		}
 
-		Vector3f GetUp(const Quaternion& quat)
+		Vec3f GetUp(const Quat& quat)
 		{
 			return Normalize(Rotate({ 0, 1, 0 }, quat));
 		}
 
-		Vector3f GetRight(const Quaternion& quat)
+		Vec3f GetRight(const Quat& quat)
 		{
 			return Normalize(Rotate({ 1, 0, 0 }, quat));
 		}
 
-		Vector3f GetXYZ(const Quaternion& quat) 
+		Vec3f GetXYZ(const Quat& quat) 
 		{ 
 			return { quat.x, quat.y, quat.z }; 
 		}
 
-		std::string ToString(const Quaternion& quat)
+		std::string ToString(const Quat& quat)
 		{
 			std::stringstream result;
 			result << "Quaternion(" << quat.x << ", " << quat.y << ", " << quat.z << ", " << quat.w << ")";
 			return result.str();
 		}
 
-		std::ostream& operator<<(std::ostream& stream, const Quaternion& quat)
+		std::ostream& operator<<(std::ostream& stream, const Quat& quat)
 		{
 			stream << ToString(quat);
 			return stream;

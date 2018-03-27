@@ -5,27 +5,27 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		Vector3f XAxis()
+		Vec3f XAxis()
 		{
 			return { -1.0f, 0.0f, 0.0f };
 		}
 
-		Vector3f YAxis()
+		Vec3f YAxis()
 		{
 			return {0.0f, 1.0f, 0.0f};
 		}
 
-		Vector3f ZAxis()
+		Vec3f ZAxis()
 		{
 			return { 0.0f, 0.0f, 1.0f };
 		}
 
-		Vector3f Zero()
+		Vec3f Zero()
 		{
 			return { 0.0f, 0.0f, 0.0f };
 		}
 
-		f32 Distance(const Vector3f& vector1, const Vector3f& vector2)
+		f32 Distance(const Vec3f& vector1, const Vec3f& vector2)
 		{
 			f32 xDiff = vector1.x - vector2.x;
 			f32 yDiff = vector1.y - vector2.y;
@@ -34,12 +34,12 @@ namespace DersEngine
 			return sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 		}
 
-		f32 Dot(const Vector3f& vector1, const Vector3f& vector2)
+		f32 Dot(const Vec3f& vector1, const Vec3f& vector2)
 		{
 			return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 		}
 
-		Vector3f Cross(const Vector3f& vector1, const Vector3f& vector2)
+		Vec3f Cross(const Vec3f& vector1, const Vec3f& vector2)
 		{
 			return
 			{
@@ -49,20 +49,20 @@ namespace DersEngine
 			};
 		}
 
-		Vector3f Lerp(const Vector3f& start, const Vector3f& target, float alpha)
+		Vec3f Lerp(const Vec3f& start, const Vec3f& target, float alpha)
 		{
 			return start + (target - start) * alpha;
 		}
 
-		Vector3f Rotate(const Vector3f& vector, const Quaternion& rotation)
+		Vec3f Rotate(const Vec3f& vector, const Quat& rotation)
 		{
-			Quaternion quat = rotation * vector * Conjugate(rotation);
+			Quat quat = rotation * vector * Conjugate(rotation);
 			return { quat.x, quat.y, quat.z };
 		}
 
-		Vector3f GetAxis(const Quaternion& quat)
+		Vec3f GetAxis(const Quat& quat)
 		{
-			Vector3f v;
+			Vec3f v;
 
 			v.x = quat.x;
 			v.y = quat.y;
@@ -71,7 +71,7 @@ namespace DersEngine
 			return Normalize(v);
 		}
 
-		f32 Length(const Vector3f& vector)
+		f32 Length(const Vec3f& vector)
 		{
 			f32 vx = vector.x;
 			f32 vy = vector.y;
@@ -80,20 +80,20 @@ namespace DersEngine
 			return sqrt(vx * vx + vy * vy + vz * vz);
 		}
 
-		Vector3f Normalize(const Vector3f& vector) 
+		Vec3f Normalize(const Vec3f& vector) 
 		{
 			f32 length = Length(vector);
 			return { vector.x / length, vector.y / length , vector.z / length };
 		}
 
-		std::string ToString(const Vector3f& vector) 
+		std::string ToString(const Vec3f& vector) 
 		{
 			std::stringstream result;
 			result << "Vector3f(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 			return result.str();
 		}
 
-		std::ostream& operator<<(std::ostream& stream, const Vector3f& vector)
+		std::ostream& operator<<(std::ostream& stream, const Vec3f& vector)
 		{
 			stream << ToString(vector);
 			return stream;

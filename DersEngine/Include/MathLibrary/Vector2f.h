@@ -3,100 +3,102 @@
 #include <string>
 #include <sstream>
 
+#include "Core\Types.h"
+
 namespace DersEngine
 {
 	namespace Maths
 	{
-		struct Vector2f
+		struct Vec2f
 		{
 			float x;
 			float y;
 		};
 
-		float Distance(const Vector2f& vector1, const Vector2f& vector2);
+		f32 Distance(const Vec2f& vector1, const Vec2f& vector2);
 
-		float Dot(const Vector2f& vector1, const Vector2f& vector2);
+		f32 Dot(const Vec2f& vector1, const Vec2f& vector2);
 
-		Vector2f Lerp(const Vector2f& start, const Vector2f& target, float alpha);
+		Vec2f Lerp(const Vec2f& start, const Vec2f& target, f32 alpha);
 
-		float Length(const Vector2f& vector);
+		f32 Length(const Vec2f& vector);
 
-		Vector2f Normalize(const Vector2f& vector);
+		Vec2f Normalize(const Vec2f& vector);
 
-		std::string ToString(const Vector2f& vector);
+		std::string ToString(const Vec2f& vector);
 
-		std::ostream& operator<<(std::ostream& stream, const Vector2f& vector);
+		std::ostream& operator<<(std::ostream& stream, const Vec2f& vector);
 
-		inline Vector2f operator+(const Vector2f& left, const Vector2f& right)
+		inline Vec2f operator+(const Vec2f& left, const Vec2f& right)
 		{
 			return { left.x + right.x , left.y + right.y };
 		}
 
-		inline Vector2f operator-(const Vector2f& left, const Vector2f& right)
+		inline Vec2f operator-(const Vec2f& left, const Vec2f& right)
 		{
 			return { left.x - right.x , left.y - right.y };
 		}
 		
-		inline Vector2f operator*(const Vector2f& left, const Vector2f& right)
+		inline Vec2f operator*(const Vec2f& left, const Vec2f& right)
 		{
 			return { left.x * right.x , left.y * right.y };
 		}
 		
-		inline Vector2f operator/(const Vector2f& left, const Vector2f& right)
+		inline Vec2f operator/(const Vec2f& left, const Vec2f& right)
 		{
 			return { left.x / right.x , left.y / right.y };
 		}
 
-		inline Vector2f operator+(const Vector2f& left, float value)
+		inline Vec2f operator+(const Vec2f& left, float value)
 		{
 			return { left.x + value , left.y + value };
 		}
 
-		inline Vector2f operator-(const Vector2f& left, float value)
+		inline Vec2f operator-(const Vec2f& left, float value)
 		{
 			return { left.x - value , left.y - value };
 		}
 
-		inline Vector2f operator*(const Vector2f& left, float value)
+		inline Vec2f operator*(const Vec2f& left, float value)
 		{
 			return { left.x * value , left.y * value };
 		}
 
-		inline Vector2f operator/(const Vector2f& left, float value)
+		inline Vec2f operator/(const Vec2f& left, float value)
 		{
 			return { left.x / value , left.y / value };
 		}
 
-		inline void operator+=(Vector2f& left, const Vector2f& right)
+		inline void operator+=(Vec2f& left, const Vec2f& right)
 		{
 			left.x = left.x + right.x;
 			left.y = left.y + right.y;
 		}
 
-		inline void operator-=(Vector2f& left, const Vector2f& right)
+		inline void operator-=(Vec2f& left, const Vec2f& right)
 		{
 			left.x = left.x - right.x;
 			left.y = left.y - right.y;
 		}
 
-		inline void operator*=(Vector2f& left, const Vector2f& right)
+		inline void operator*=(Vec2f& left, const Vec2f& right)
 		{
 			left.x = left.x * right.x;
 			left.y = left.y * right.y;
 		}
 
-		inline void operator/=(Vector2f& left, const Vector2f& right)
+		inline void operator/=(Vec2f& left, const Vec2f& right)
 		{
 			left.x = left.x / right.x;
 			left.y = left.y / right.y;
 		}
 
-		inline bool operator==(const Vector2f& left, const Vector2f& right)
+		inline bool operator==(const Vec2f& left, const Vec2f& right)
 		{
 			return left.x == right.x && left.y == right.y;
 		}
 
-		inline bool operator!=(const Vector2f& left, const Vector2f& right)
+		inline bool operator!=(const Vec2f& left, const Vec2f& right)
 		{
 			return !(left == right);
 		}

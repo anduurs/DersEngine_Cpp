@@ -7,44 +7,44 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		struct Vector3f;
-		struct Quaternion;
+		struct Vec3f;
+		struct Quat;
 
-		struct Matrix4f
+		struct Mat4f
 		{
 			// 64 bytes
 			float data[16];
 		};
 
-		Matrix4f CreateMatrix4f();
+		Mat4f CreateMatrix4f();
 
-		Matrix4f Translate(Matrix4f& mat, float x, float y, float z);
+		Mat4f Translate(Mat4f& mat, float x, float y, float z);
 
-		Matrix4f Scale(Matrix4f& mat, float x, float y, float z);
+		Mat4f Scale(Mat4f& mat, float x, float y, float z);
 
-		Matrix4f Rotate(Matrix4f& mat, const Vector3f& axis, float angle);
+		Mat4f Rotate(Mat4f& mat, const Vec3f& axis, float angle);
 
-		Matrix4f Rotate(Matrix4f& mat, const Quaternion& quat);
+		Mat4f Rotate(Mat4f& mat, const Quat& quat);
 
-		Matrix4f Perspective(Matrix4f& mat, float fieldOfView, float aspectRatio, float zNear, float zFar);
+		Mat4f Perspective(Mat4f& mat, float fieldOfView, float aspectRatio, float zNear, float zFar);
 
-		Matrix4f Ortho(Matrix4f& mat, float left, float right, float bottom, float top, float near, float far);
+		Mat4f Ortho(Mat4f& mat, float left, float right, float bottom, float top, float near, float far);
 
-		Matrix4f LookAt(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right);
+		Mat4f LookAt(Mat4f& mat, const Vec3f& forward, const Vec3f& up, const Vec3f& right);
 
-		Matrix4f Basis(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right);
+		Mat4f Basis(Mat4f& mat, const Vec3f& forward, const Vec3f& up, const Vec3f& right);
 
-		Matrix4f Invers(Matrix4f& mat);
+		Mat4f Invers(Mat4f& mat);
 
-		Matrix4f Transpose(Matrix4f& mat);
+		Mat4f Transpose(Mat4f& mat);
 
-		void Identity(Matrix4f& mat);
+		void Identity(Mat4f& mat);
 
-		std::string ToString(const Matrix4f& mat);
+		std::string ToString(const Mat4f& mat);
 
-		std::ostream& operator<<(std::ostream& stream, const Matrix4f& mat);
+		std::ostream& operator<<(std::ostream& stream, const Mat4f& mat);
 
-		Matrix4f operator*(const Matrix4f& mat1, const Matrix4f& mat2);
+		Mat4f operator*(const Mat4f& mat1, const Mat4f& mat2);
 		
 	}
 }

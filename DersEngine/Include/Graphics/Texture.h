@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Core\Types.h"
+
 namespace DersEngine
 {
 	namespace Graphics
@@ -18,7 +20,8 @@ namespace DersEngine
 
 		struct Texture
 		{
-			unsigned int id;
+			u32 id;
+			u32 textureSlot;
 			TextureType type;
 			std::string path;
 		};

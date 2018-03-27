@@ -9,15 +9,15 @@ namespace DersEngine
 	{
 		struct Transform
 		{
-			Vector3f position;
-			Vector3f scale;
-			Quaternion orientation;
+			Vec3f position;
+			Vec3f scale;
+			Quat orientation;
 		};
 
 		struct RigidBodyTransform
 		{
-			Vector3f position;
-			Quaternion orientation;
+			Vec3f position;
+			Quat orientation;
 		};
 	}
 }

@@ -10,9 +10,9 @@ namespace DersEngine
 
 		struct Vertex
 		{
-			Vector3f position;
-			Vector3f normal;
-			Vector2f textureCoordinate;
+			Vec3f position;
+			Vec3f normal;
+			Vec2f textureCoordinate;
 		};
 	}
 }

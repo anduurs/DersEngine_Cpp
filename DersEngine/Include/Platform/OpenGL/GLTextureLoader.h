@@ -3,11 +3,13 @@
 #include <GL\glew.h>
 #include <string>
 
+#include "Core\Types.h"
+
 namespace DersEngine
 {
-	namespace Graphics
+	namespace Platform
 	{
-		namespace OpenGL_API
+		namespace OpenGL
 		{
 			using TextureWrap = GLuint;
 			using TextureFilter = GLuint;
@@ -18,12 +20,12 @@ namespace DersEngine
 				TextureFilter minFilterMethod;
 				TextureFilter magFilterMethod;
 				bool useMipMapping;
-				float anisotropicFilteringLevel;
+				f32 anisotropicFilteringLevel;
 			};
 
-			unsigned int LoadTexture(const std::string& path);
-			unsigned int LoadTextureFromFile(const std::string& path, const std::string& directory);
-			unsigned int LoadTexture(const std::string& path, const TextureParameters& params);
+			u32 LoadTexture(const std::string& path);
+			u32 LoadTextureFromFile(const std::string& path, const std::string& directory);
+			u32 LoadTexture(const std::string& path, const TextureParameters& params);
 		}
 	}
 }

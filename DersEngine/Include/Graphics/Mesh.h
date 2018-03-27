@@ -1,8 +1,6 @@
 #pragma once
 
-
-#include "Graphics\Material.h"
-#include <vector>
+#include "Core\Types.h"
 
 namespace DersEngine 
 {
@@ -10,9 +8,8 @@ namespace DersEngine
 	{
 		struct Mesh
 		{
-			unsigned int id;
-			unsigned int numOfIndices;
-			Material* material;
+			u32 id;
+			u32 indices;
 		};
 	}
 }

@@ -7,7 +7,7 @@
 #include "Graphics\RenderEngine.h"
 #include "Graphics\Shader.h"
 #include "Platform\OpenGL\GLTextureLoader.h"
-#include "Core/MemoryAllocators/LinearAllocator.h"
+#include "Core/Memory/LinearAllocator.h"
 
 #include<time.h>
 #include<iostream>
@@ -17,7 +17,7 @@ using namespace Maths;
 using namespace Debug;
 using namespace Utils;
 using namespace Graphics;
-using namespace MemoryManagement;
+using namespace Memory;
 
 struct Entity
 {

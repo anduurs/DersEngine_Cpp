@@ -1,5 +1,5 @@
 #include "MathLibrary\Matrix4f.h"
-#include "MathLibrary\MathLibrary.h"
+#include "MathLibrary\MathUtil.h"
 #include "MathLibrary\Quaternion.h"
 #include "MathLibrary\Vector3f.h"
 
@@ -7,14 +7,14 @@ namespace DersEngine
 {
 	namespace Maths
 	{
-		Matrix4f CreateMatrix4f()
+		Mat4f CreateMatrix4f()
 		{
-			Matrix4f mat;
+			Mat4f mat;
 			memset(mat.data, 0, 16 * sizeof(float));
 			return mat;
 		}
 
-		Matrix4f Translate(Matrix4f& mat, float x, float y, float z)
+		Mat4f Translate(Mat4f& mat, float x, float y, float z)
 		{
 			//col + row * 4
 			Identity(mat);
@@ -26,7 +26,7 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Scale(Matrix4f& mat, float x, float y, float z)
+		Mat4f Scale(Mat4f& mat, float x, float y, float z)
 		{
 			//col + row * 4
 			Identity(mat);
@@ -38,17 +38,17 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Rotate(Matrix4f& mat, const Vector3f& axis, float angle)
+		Mat4f Rotate(Mat4f& mat, const Vec3f& axis, float angle)
 		{
 			return mat;
 		}
 
-		Matrix4f Rotate(Matrix4f& mat, const Quaternion& quat)
+		Mat4f Rotate(Mat4f& mat, const Quat& quat)
 		{
 			return mat;
 		}
 
-		Matrix4f Perspective(Matrix4f& mat, float fieldOfView, float aspectRatio, float zNear, float zFar)
+		Mat4f Perspective(Mat4f& mat, float fieldOfView, float aspectRatio, float zNear, float zFar)
 		{
 			Identity(mat);
 
@@ -63,7 +63,7 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Ortho(Matrix4f& mat, float left, float right, float bottom, float top, float near, float far)
+		Mat4f Ortho(Mat4f& mat, float left, float right, float bottom, float top, float near, float far)
 		{
 			Identity(mat);
 
@@ -78,7 +78,7 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f LookAt(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right)
+		Mat4f LookAt(Mat4f& mat, const Vec3f& forward, const Vec3f& up, const Vec3f& right)
 		{
 			Identity(mat);
 
@@ -86,7 +86,7 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Basis(Matrix4f& mat, const Vector3f& forward, const Vector3f& up, const Vector3f& right)
+		Mat4f Basis(Mat4f& mat, const Vec3f& forward, const Vec3f& up, const Vec3f& right)
 		{
 			Identity(mat);
 
@@ -105,7 +105,7 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Invers(Matrix4f& mat)
+		Mat4f Invers(Mat4f& mat)
 		{
 			float temp[16];
 
@@ -232,12 +232,12 @@ namespace DersEngine
 			return mat;
 		}
 
-		Matrix4f Transpose(Matrix4f& mat)
+		Mat4f Transpose(Mat4f& mat)
 		{
 			return mat;
 		}
 
-		void Identity(Matrix4f& mat)
+		void Identity(Mat4f& mat)
 		{
 			memset(mat.data, 0, 16 * sizeof(float));
 
@@ -248,7 +248,7 @@ namespace DersEngine
 			mat.data[3 + 3 * 4] = 1.0f;
 		}
 
-		std::string ToString(const Matrix4f& mat)
+		std::string ToString(const Mat4f& mat)
 		{
 			std::stringstream result;
 
@@ -264,15 +264,15 @@ namespace DersEngine
 			return result.str();
 		}
 
-		std::ostream& operator<<(std::ostream& stream, const Matrix4f& mat)
+		std::ostream& operator<<(std::ostream& stream, const Mat4f& mat)
 		{
 			stream << ToString(mat);
 			return stream;
 		}
 
-		Matrix4f operator*(const Matrix4f& mat1, const Matrix4f& mat2)
+		Mat4f operator*(const Mat4f& mat1, const Mat4f& mat2)
 		{
-			Matrix4f res;
+			Mat4f res;
 			
 			for (int row = 0; row < 4; row++)
 			{

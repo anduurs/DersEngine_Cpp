@@ -89,7 +89,7 @@ namespace DersEngine
 			}
 		}
 
-		void Material::AddVec2(const std::string& name, Vector2f value)
+		void Material::AddVec2(const std::string& name, Vec2f value)
 		{
 			auto it = std::find_if(m_Vec2Uniforms.begin(), m_Vec2Uniforms.end(),
 				[&](const auto& elem)
@@ -114,7 +114,7 @@ namespace DersEngine
 			}
 		}
 
-		void Material::AddVec3(const std::string& name, Vector3f value)
+		void Material::AddVec3(const std::string& name, Vec3f value)
 		{
 			auto it = std::find_if(m_Vec3Uniforms.begin(), m_Vec3Uniforms.end(),
 				[&](const auto& elem)
@@ -139,7 +139,7 @@ namespace DersEngine
 			}
 		}
 
-		void Material::AddMat4(const std::string& name, Matrix4f value)
+		void Material::AddMat4(const std::string& name, Mat4f value)
 		{
 			auto it = std::find_if(m_Mat4Uniforms.begin(), m_Mat4Uniforms.end(),
 				[&](const auto& elem)

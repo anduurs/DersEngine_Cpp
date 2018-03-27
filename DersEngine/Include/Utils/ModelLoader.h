@@ -8,12 +8,15 @@
 #include "Graphics\Mesh.h"
 #include "Graphics\Texture.h"
 #include "Graphics\Model.h"
+#include "Platform\OpenGL\GLTextureLoader.h"
+#include "Platform\OpenGL\GLRenderingUtil.h"
 
 namespace DersEngine
 {
 	namespace Utils
 	{
 		using namespace Graphics;
+		using namespace Platform;
 
 		Model LoadModel(const std::string& path, Model& model);
 
