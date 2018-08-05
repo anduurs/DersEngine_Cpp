@@ -23,13 +23,17 @@ namespace DersEngine
 
 		void Start();
 		void Stop();
+
+	protected:
+		void Init();
+		void ProcessInput();
+		void Update(float deltaTime);
+		void Render();
+		
 	private:
 		volatile bool m_Running;
 		std::unique_ptr<Window> m_Window;
 
-		void ProcessInputs();
-		void Update(float deltaTime);
-		void Render();
 		void RunGameLoop();
 	};
 }

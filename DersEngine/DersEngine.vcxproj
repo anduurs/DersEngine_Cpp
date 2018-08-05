@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Core\Common.h" />
+    <ClInclude Include="Include\Core\DataStructures\Array.h" />
+    <ClInclude Include="Include\Core\DataStructures\Map.h" />
     <ClInclude Include="Include\Core\Engine.h" />
     <ClInclude Include="Include\Core\GameApplication.h" />
     <ClInclude Include="Include\Core\Memory\LinearAllocator.h" />
@@ -27,15 +30,18 @@
     <ClInclude Include="Include\Core\StackAllocator.h" />
     <ClInclude Include="Include\Core\Types.h" />
     <ClInclude Include="Include\Debug\DebugLogging.h" />
+    <ClInclude Include="Include\ECS\ECS_Manager.h" />
+    <ClInclude Include="Include\ECS\ECS_ComponentData.h" />
+    <ClInclude Include="Include\ECS\ECS_System.h" />
     <ClInclude Include="Include\Graphics\Material.h" />
     <ClInclude Include="Include\Graphics\Mesh.h" />
     <ClInclude Include="Include\Graphics\Model.h" />
-    <ClInclude Include="Include\Graphics\RenderEngine.h" />
+    <ClInclude Include="Include\Graphics\Renderer.h" />
     <ClInclude Include="Include\Graphics\Shader.h" />
     <ClInclude Include="Include\Graphics\Texture.h" />
     <ClInclude Include="Include\Graphics\Vertex.h" />
     <ClInclude Include="Include\Graphics\Window.h" />
-    <ClInclude Include="Include\Input\InputManager.h" />
+    <ClInclude Include="Include\Input\InputEventHandler.h" />
     <ClInclude Include="Include\MathLibrary\MathUtil.h" />
     <ClInclude Include="Include\MathLibrary\MathHeaders.h" />
     <ClInclude Include="Include\MathLibrary\Matrix4f.h" />
@@ -57,8 +63,10 @@
     <ClCompile Include="Source\Core\GameApplication.cpp" />
     <ClCompile Include="Source\Core\Memory\LinearAllocator.cpp" />
     <ClCompile Include="Source\Core\Memory\StackAllocator.cpp" />
+    <ClCompile Include="Source\ECS\ECS_ComponentData.cpp" />
+    <ClCompile Include="Source\ECS\ECS_Manager.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
-    <ClCompile Include="Source\Graphics\RenderEngine.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />

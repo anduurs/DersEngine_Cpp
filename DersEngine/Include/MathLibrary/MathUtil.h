@@ -40,6 +40,8 @@ namespace DersEngine
 
 		f32 Max(f32 value1, f32 value2);
 
+		s32 MaxInt(s32 value1, s32 value2);
+
 		f32 Cos(f32 angleInRadians);
 
 		f32 Sin(f32 angleInRadians);

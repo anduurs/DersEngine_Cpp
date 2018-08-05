@@ -25,6 +25,11 @@ namespace DersEngine
 			return value1 > value2 ? value1 : value2;
 		}
 
+		s32 MaxInt(s32 value1, s32 value2)
+		{
+			return value1 > value2 ? value1 : value2;
+		}
+
 		f32 Cos(f32 angleInRadians)
 		{
 			float r = cos(angleInRadians);

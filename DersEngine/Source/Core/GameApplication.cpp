@@ -27,6 +27,11 @@ namespace DersEngine
 
 	}
 
+	void GameApplication::Init()
+	{
+
+	}
+
 	void GameApplication::Start()
 	{
 		std::cout << "Game engine started" << std::endl;
@@ -40,7 +45,7 @@ namespace DersEngine
 		m_Running = false;
 	}
 
-	void GameApplication::ProcessInputs()
+	void GameApplication::ProcessInput()
 	{
 		m_Window->PollEvents();
 	}
@@ -53,6 +58,7 @@ namespace DersEngine
 	void GameApplication::Render()
 	{
 		//Render scene
+
 		m_Window->SwapBuffers();
 	}
 
@@ -90,7 +96,7 @@ namespace DersEngine
 
 			while (accumulator >= SECONDS_PER_UPDATE)
 			{
-				ProcessInputs();
+				ProcessInput();
 
 				Update(dt);
 

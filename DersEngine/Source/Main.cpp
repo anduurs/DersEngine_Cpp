@@ -4,11 +4,14 @@
 #include "Debug/DebugLogging.h"
 #include "Utils\FileManager.h"
 #include "Utils\ModelLoader.h"
-#include "Graphics\RenderEngine.h"
+#include "Graphics\Renderer.h"
 #include "Graphics\Shader.h"
 #include "Platform\OpenGL\GLTextureLoader.h"
 #include "Core/Memory/LinearAllocator.h"
 #include "Core\Memory\StackAllocator.h"
+
+
+#include "ECS/ECS_Manager.h"
 
 #include<time.h>
 #include<iostream>
@@ -60,3 +63,4 @@ int main()
 	game.Start();
 	return 0;
 }
+

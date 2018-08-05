@@ -166,7 +166,8 @@ namespace DersEngine
 
 		void Material::UpdateUniforms()
 		{
-			for (const auto& uniform : m_TexturesUpdated) {
+			for (const auto& uniform : m_TexturesUpdated) 
+			{
 				//m_Shader->LoadInteger(uniform.name, uniform.)
 			}
 
