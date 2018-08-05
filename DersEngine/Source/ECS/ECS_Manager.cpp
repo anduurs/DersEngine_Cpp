@@ -28,7 +28,7 @@ namespace DersEngine
 			}
 		}
 
-		EntityHandle ECSManager::CreateEntity(BaseComponentData* components, const u32* componentIDs, size_t numOfComponents)
+		EntityHandle ECSManager::CreateEntity(BaseComponentData** components, const u32* componentIDs, size_t numOfComponents)
 		{
 			Entity* newEntity = new Entity();
 			EntityHandle handle = (EntityHandle)newEntity;
@@ -45,7 +45,7 @@ namespace DersEngine
 					return NULL_ENTITY_HANDLE;
 				}
 
-				AddComponentInternal(handle, newEntity->second, componentID, &components[i]);
+				AddComponentInternal(handle, newEntity->second, componentID, components[i]);
 			}
 
 			newEntity->first = m_Entities.size();
@@ -76,48 +76,29 @@ namespace DersEngine
 			m_Entities.pop_back();
 		}
 
-		void ECSManager::AddSystem(BaseSystem& system)
-		{
-			m_Systems.emplace_back(&system);
-		}
-
-		bool ECSManager::RemoveSystem(BaseSystem& system)
-		{
-			for (u32 i = 0; i < m_Systems.size(); i++)
-			{
-				if (&system == m_Systems[i])
-				{
-					m_Systems.erase(m_Systems.begin() + i);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		void ECSManager::UpdateSystems(float deltaTime)
+		void ECSManager::UpdateSystems(ECSSystemList& systems, float deltaTime)
 		{
 			Array<BaseComponentData*> componentParams;
 			Array<Array<u8>*> componentArrays;
 	
-			for (const auto& system : m_Systems)
+			for (int i = 0; i < systems.Size(); i++)
 			{
-				const Array<u32> componentTypes = system->GetComponentTypes();
+				const Array<u32> componentTypes = systems[i]->GetComponentTypes();
 
 				if (componentTypes.size() == 1)
 				{
 					size_t typeSize = BaseComponentData::GetTypeSize(componentTypes[0]);
 					Array<u8>& components = m_Components[componentTypes[0]];
 
-					for (u32 i = 0; i < components.size(); i += typeSize)
+					for (u32 j = 0; j < components.size(); j += typeSize)
 					{
-						BaseComponentData* component = (BaseComponentData*)&components[i];
-						system->UpdateComponents(deltaTime, &component);
+						BaseComponentData* component = (BaseComponentData*)&components[j];
+						systems[i]->UpdateComponents(deltaTime, &component);
 					}
 				}
 				else
 				{
-					UpdateSystemWithMultipleComponents(*system, deltaTime, componentTypes, componentParams, componentArrays);
+					UpdateSystemWithMultipleComponents(*systems[i], systems, deltaTime, componentTypes, componentParams, componentArrays);
 				}
 			}
 		}
@@ -199,9 +180,11 @@ namespace DersEngine
 			return nullptr;
 		}
 
-		void ECSManager::UpdateSystemWithMultipleComponents(BaseSystem& system, float deltaTime,
+		void ECSManager::UpdateSystemWithMultipleComponents(BaseSystem& system, ECSSystemList& systems, float deltaTime,
 				const Array<u32>& componentTypes, Array<BaseComponentData*>& componentParams, Array<Array<u8>*>& componentArrays)
 		{
+			const Array<u32>& componentFlags = system.GetComponentFlags();
+
 			componentParams.resize(Maths::MaxInt(componentParams.size(), componentTypes.size()));
 			componentArrays.resize(Maths::MaxInt(componentArrays.size(), componentTypes.size()));
 
@@ -210,7 +193,7 @@ namespace DersEngine
 				componentArrays.emplace_back(&m_Components[componentType]);
 			}
 
-			u32 minSizeIndex = FindLeastCommonComponent(componentTypes);
+			u32 minSizeIndex = FindLeastCommonComponent(componentTypes, componentFlags);
 
 			size_t typeSize = BaseComponentData::GetTypeSize(componentTypes[minSizeIndex]);
 			Array<u8>& array = *componentArrays[minSizeIndex];
@@ -231,7 +214,7 @@ namespace DersEngine
 
 					componentParams[j] = GetComponentInternal(entityComponents, *componentArrays[j], componentTypes[j]);
 
-					if (!componentParams[j])
+					if (!componentParams[j] && (componentFlags[j] & BaseSystem::FLAG_OPTIONAL) == 0)
 					{
 						isValid = false;
 						break;
@@ -245,17 +228,22 @@ namespace DersEngine
 			}
 		}
 
-		u32 ECSManager::FindLeastCommonComponent(const Array<u32>& componentTypes)
+		u32 ECSManager::FindLeastCommonComponent(const Array<u32>& componentTypes, const Array<u32>& componentFlags)
 		{
-			u32 minSize = m_Components[componentTypes[0]].size() / BaseComponentData::GetTypeSize(componentTypes[0]);
-			u32 minIndex = 0;
+			u32 minSize  = (u32)-1;
+			u32 minIndex = (u32)-1;
 
-			for (u32 i = 1; i < componentTypes.size(); i++)
+			for (u32 i = 0; i < componentTypes.size(); i++)
 			{
+				if ((componentFlags[i] & BaseSystem::FLAG_OPTIONAL) != 0)
+				{
+					continue;
+				}
+
 				size_t typeSize = BaseComponentData::GetTypeSize(componentTypes[i]);
 				u32 size = m_Components[componentTypes[i]].size() / typeSize;
 
-				if (size < minSize)
+				if (size <= minSize)
 				{
 					minSize  = size;
 					minIndex = i;

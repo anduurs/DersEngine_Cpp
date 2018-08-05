@@ -24,9 +24,23 @@ namespace DersEngine
 			~ECSManager();
 
 			// Entity functions
-			EntityHandle CreateEntity(BaseComponentData* components, const u32* componentIDs, size_t numOfComponents);
+			EntityHandle CreateEntity(BaseComponentData** components, const u32* componentIDs, size_t numOfComponents);
 
 			void RemoveEntity(EntityHandle handle);
+
+			template<class ...Args>
+			EntityHandle CreateEntity(Args&... args)
+			{
+				Array<BaseComponentData*> components = { args... };
+				Array<u32> componentIDs;
+
+				for (int i = 0; i < components.size(); i++)
+				{
+					componentIDs.emplace_back(components[i]::ID);
+				}
+				
+				return CreateEntity(components, componentIDs, components.size());
+			}
 
 			// Component functions
 			template<class T>
@@ -44,18 +58,13 @@ namespace DersEngine
 			template<class T>
 			inline BaseComponentData* GetComponent(EntityHandle entity)
 			{
-				return GetComponentInternal(HandleToEntity(entity), m_Components[T::ID], T::ID);
+				return (T*) GetComponentInternal(HandleToEntity(entity), m_Components[T::ID], T::ID);
 			}
 
 			// System functions
-			void AddSystem(BaseSystem& system);
-
-			bool RemoveSystem(BaseSystem& system);
-
-			void UpdateSystems(float deltaTime);
+			void UpdateSystems(ECSSystemList& systems, float deltaTime);
 
 		private:
-			Array<BaseSystem*> m_Systems;
 			Map<u32, Array<u8>> m_Components;
 			Array<Entity*> m_Entities;
 
@@ -68,10 +77,10 @@ namespace DersEngine
 
 			BaseComponentData* GetComponentInternal(ComponentsArray& entityComponents, Array<u8>& array, u32 componentID);
 
-			void UpdateSystemWithMultipleComponents(BaseSystem& system, float deltaTime,
+			void UpdateSystemWithMultipleComponents(BaseSystem& system, ECSSystemList& systems, float deltaTime,
 				const Array<u32>& componentTypes, Array<BaseComponentData*>& componentParams, Array<Array<u8>*>& componentArrays);
 
-			u32 FindLeastCommonComponent(const Array<u32>& componentTypes);
+			u32 FindLeastCommonComponent(const Array<u32>& componentTypes, const Array<u32>& componentFlags);
 
 			inline Entity* HandleToRawType(EntityHandle handle)
 			{

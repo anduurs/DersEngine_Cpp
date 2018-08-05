@@ -9,8 +9,6 @@
 #include "Platform\OpenGL\GLTextureLoader.h"
 #include "Core/Memory/LinearAllocator.h"
 #include "Core\Memory\StackAllocator.h"
-
-
 #include "ECS/ECS_Manager.h"
 
 #include<time.h>
@@ -22,44 +20,25 @@ using namespace Debug;
 using namespace Utils;
 using namespace Graphics;
 using namespace Memory;
+using namespace ECS;
 
-struct Entity
+struct TransformComponent : public ComponentData<TransformComponent>
 {
-	u32 id;
-	Transform transform;
+	Vec3f position;
+	Vec3f scale;
+	Quat orientation;
 };
-
-
-struct Component
-{
-	u32 id;
-	u32 a;
-	u16 b;
-	u8 c;
-};
-
 
 int main()
 {	
-	Debug::Log(sizeof(Entity));
-	LinearAllocator allocator;
-	allocator.Reserve(sizeof(Entity) * 64);
-	//start: 
-	//1840681766764
-	Entity* e  = (Entity*)allocator.Allocate(sizeof(Entity), 4);
-	Entity* e2 = (Entity*)allocator.Allocate(sizeof(Entity), 8);
-	Component* c = (Component*)allocator.Allocate(sizeof(Component), 16);
-	Entity* e3 = (Entity*)allocator.Allocate(sizeof(Entity), 4);
-	Entity* e4 = (Entity*)allocator.Allocate(sizeof(Entity), 4);
-	
+	ECSManager ecs;
 
-	//Model
+	TransformComponent transform;
+	transform.position = Vec3f(0.0f, 0.0f, 20.0f);
 
-	//Material* mat = new Material(shader);
+	ecs.CreateEntity(TransformComponent);
+
 	GameApplication game = { 800, 600, "DersEngine v0.01", true, false };
-
-	//Shader* shader = new Shader("Resources/Shaders/PhongVertexShader.vert", "Resources/Shaders/PhongFragmentShader.frag");
-	//Model model = LoadModel("Resources/Models/TestModel/test.fbx", model);
 	game.Start();
 	return 0;
 }

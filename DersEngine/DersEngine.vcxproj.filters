@@ -203,6 +203,9 @@
     <ClCompile Include="Source\ECS\ECS_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ECS\ECS_System.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\PhongVertexShader.vert" />
